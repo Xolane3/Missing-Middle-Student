@@ -8,7 +8,7 @@ export default function AdminDashboard() {
           <section className="bg-white p-6 rounded shadow-md">
             <h2 className="text-xl font-bold">Laptop Applications</h2>
             <p className="mt-2">You have 5 new laptop applications to review.</p>
-            <button className="mt-4 bg-blue-500 text-white py-2 rounded">Review Applications</button>
+            <button className="mt-4 bg-blue-500 text-black py-2 rounded">Review Applications</button>
           </section>
           <section className="mt-6 bg-white p-6 rounded shadow-md">
             <h2 className="text-xl font-bold">Reports</h2>

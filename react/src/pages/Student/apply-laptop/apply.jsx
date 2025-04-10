@@ -58,7 +58,7 @@ export default function ApplyForLaptop() {
               placeholder="Enter your full name"
               value={studentName}
               onChange={(e) => setStudentName(e.target.value)}
-              required
+             
             />
           </div>
 
@@ -74,7 +74,7 @@ export default function ApplyForLaptop() {
               placeholder="Enter your email address"
               value={studentEmail}
               onChange={(e) => setStudentEmail(e.target.value)}
-              required
+          
             />
           </div>
 
@@ -106,7 +106,7 @@ export default function ApplyForLaptop() {
               id="citizenship"
               value={citizenship}
               onChange={(e) => setCitizenship(e.target.value)}
-              required
+              
             >
               <option value="">Select Citizenship</option>
               <option value="Yes">Yes</option>
@@ -124,7 +124,7 @@ export default function ApplyForLaptop() {
               id="campus"
               value={campus}
               onChange={(e) => setCampus(e.target.value)}
-              required
+              
             >
               <option value="">Select Campus</option>
               <option value="Campus 1">Campus 1</option>
@@ -144,7 +144,7 @@ export default function ApplyForLaptop() {
               id="nationality"
               value={nationality}
               onChange={(e) => setNationality(e.target.value)}
-              required
+            
             >
               <option value="">Select Nationality</option>
               <option value="African">African</option>
@@ -165,7 +165,7 @@ export default function ApplyForLaptop() {
               placeholder="Enter your course"
               value={course}
               onChange={(e) => setCourse(e.target.value)}
-              required
+             
             />
           </div>
 
@@ -181,7 +181,7 @@ export default function ApplyForLaptop() {
               placeholder="Enter your average percentage"
               value={academicPerformance}
               onChange={(e) => setAcademicPerformance(e.target.value)}
-              required
+              
             />
           </div>
 
@@ -195,7 +195,7 @@ export default function ApplyForLaptop() {
               id="financialAidStatus"
               value={financialAidStatus}
               onChange={(e) => setFinancialAidStatus(e.target.value)}
-              required
+            
             >
               <option value="">Select Financial Aid Status</option>
               <option value="Verified">Verified</option>
@@ -213,7 +213,7 @@ export default function ApplyForLaptop() {
               id="nsfasStatus"
               value={nsfasStatus}
               onChange={(e) => setNsfasStatus(e.target.value)}
-              required
+             
             >
               <option value="">Select NSFAS Status</option>
               <option value="Not on NSFAS">Not on NSFAS</option>
@@ -231,7 +231,7 @@ export default function ApplyForLaptop() {
               id="missingMiddleStatus"
               value={missingMiddleStatus}
               onChange={(e) => setMissingMiddleStatus(e.target.value)}
-              required
+              
             >
               <option value="">Select Missing Middle Status</option>
               <option value="Yes">Yes</option>
@@ -251,7 +251,7 @@ export default function ApplyForLaptop() {
               placeholder="Enter your faculty selection"
               value={facultySelection}
               onChange={(e) => setFacultySelection(e.target.value)}
-              required
+             
             />
           </div>
 

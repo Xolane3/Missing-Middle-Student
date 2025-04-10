@@ -1,0 +1,25 @@
+.nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s, transform 0.3s;
+  }
+  
+  .nav-link:hover {
+    color: #0056b3;  /* Change the text color on hover */
+    transform: scale(1.1);  /* Slight zoom effect */
+  }
+  
+  .logout-link {
+    color: #dc3545;
+  }
+  
+  .logout-link:hover {
+    color: #b02a2a; /* Dark red color for the logout link */
+  }
+  

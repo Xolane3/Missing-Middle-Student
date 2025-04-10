@@ -58,7 +58,7 @@ export default function StudentSignup() {
                 placeholder="Enter student number"
                 value={studentNumber}
                 onChange={(e) => setStudentNumber(e.target.value)}
-                required
+               
               />
             </div>
 
@@ -71,7 +71,7 @@ export default function StudentSignup() {
                 placeholder="Enter surname"
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
-                required
+                
               />
             </div>
 
@@ -84,7 +84,7 @@ export default function StudentSignup() {
                 placeholder="Enter initials"
                 value={initials}
                 onChange={(e) => setInitials(e.target.value)}
-                required
+                
               />
             </div>
 
@@ -95,7 +95,7 @@ export default function StudentSignup() {
                 id="qualification"
                 value={qualification}
                 onChange={(e) => setQualification(e.target.value)}
-                required
+                
               >
                 <option value="">Select Qualification</option>
                 <option value="NDip IT: Multimedia">NDip IT: Multimedia</option>
@@ -113,7 +113,7 @@ export default function StudentSignup() {
                 placeholder="Enter current year (e.g., 2025)"
                 value={currentYear}
                 onChange={(e) => setCurrentYear(e.target.value)}
-                required
+                
               />
             </div>
 
@@ -126,7 +126,7 @@ export default function StudentSignup() {
                 placeholder="Enter your email"
                 value={studentEmail}
                 onChange={(e) => setStudentEmail(e.target.value)}
-                required
+                
               />
             </div>
 
@@ -139,7 +139,7 @@ export default function StudentSignup() {
                 placeholder="Enter your password"
                 value={studentPassword}
                 onChange={(e) => setStudentPassword(e.target.value)}
-                required
+                
               />
             </div>
 
@@ -152,7 +152,7 @@ export default function StudentSignup() {
                 placeholder="Confirm your password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                required
+                
               />
             </div>
 

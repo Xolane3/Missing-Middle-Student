@@ -6,6 +6,8 @@ import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import TechnicianLogin from "./pages/Technician/TechnicianLogin";
 import TechnicianDashboard from "./pages/Technician/TechnicianDashboard";
+import Apply from "./pages/Student/apply-laptop/apply";
+
 
 export const router = createBrowserRouter([
   { path: "/", element: <StudentLogin /> },
@@ -16,4 +18,6 @@ export const router = createBrowserRouter([
   { path: "/admin/dashboard", element: <AdminDashboard /> },
   { path: "/technician/login", element: <TechnicianLogin /> },
   { path: "/technician/dashboard", element: <TechnicianDashboard /> },
+  { path: "/student/apply-laptop", element: <Apply /> },
+  
 ]);

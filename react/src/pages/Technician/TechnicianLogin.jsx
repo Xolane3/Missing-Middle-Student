@@ -12,7 +12,7 @@ export default function TechnicianLogin() {
     e.preventDefault();
 
     // Simulate technician login logic (replace with actual API call)
-    if (technicianEmail === "technician@example.com" && technicianPassword === "technicianpassword") {
+    if (technicianEmail === "" && technicianPassword === "") {
       navigate("/technician/dashboard");
     } else {
       setErrorMessage("Invalid email or password. Please try again.");
@@ -58,7 +58,7 @@ export default function TechnicianLogin() {
                 placeholder="Enter your email"
                 value={technicianEmail}
                 onChange={(e) => setTechnicianEmail(e.target.value)}
-                required
+               
               />
             </div>
 
@@ -73,7 +73,7 @@ export default function TechnicianLogin() {
                 placeholder="Enter your password"
                 value={technicianPassword}
                 onChange={(e) => setTechnicianPassword(e.target.value)}
-                required
+                
               />
             </div>
 

@@ -12,7 +12,7 @@ export default function AdminLogin() {
     e.preventDefault();
 
     // Simulate admin login logic (replace with actual API call)
-    if (adminEmail === "admin@example.com" && adminPassword === "adminpassword") {
+    if (adminEmail === "" && adminPassword === "") {
       navigate("/admin/dashboard");
     } else {
       setErrorMessage("Invalid email or password. Please try again.");
@@ -58,7 +58,7 @@ export default function AdminLogin() {
                 placeholder="Enter your email"
                 value={adminEmail}
                 onChange={(e) => setAdminEmail(e.target.value)}
-                required
+               
               />
             </div>
 
@@ -73,7 +73,7 @@ export default function AdminLogin() {
                 placeholder="Enter your password"
                 value={adminPassword}
                 onChange={(e) => setAdminPassword(e.target.value)}
-                required
+              
               />
             </div>
 

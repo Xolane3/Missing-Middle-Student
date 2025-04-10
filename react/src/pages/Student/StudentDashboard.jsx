@@ -1,5 +1,8 @@
+// StudentDashboard.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/studentNavbar"; // Import the NavBar component
+
 
 export default function StudentDashboard() {
   const navigate = useNavigate();
@@ -26,7 +29,7 @@ export default function StudentDashboard() {
 
   const handleApplyForLaptop = () => {
     // Navigate to the application page to apply for the laptop
-    navigate("/apply-laptop");
+    navigate("/student/apply-laptop");
   };
 
   const handleStatusCheck = () => {
@@ -36,29 +39,15 @@ export default function StudentDashboard() {
 
   return (
     <div>
-      {/* Navigation Bar */}
-      <nav className="navbar bg-light p-3">
-        <div className="container-fluid">
-          <span className="navbar-brand">
-            Welcome, {user.username}
-          </span>
-          <span className="navbar-text mx-3">
-            {user.email}
-          </span>
-          <button className="btn btn-primary mx-2" onClick={() => setNotifications(notifications + 1)}>
-            Notifications ({notifications})
-          </button>
-          <button className="btn btn-success mx-2" onClick={handleApplyForLaptop}>
-            Apply for Laptop
-          </button>
-          <button className="btn btn-info mx-2" onClick={handleStatusCheck}>
-            Application Status
-          </button>
-          <button className="btn btn-danger mx-2" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </nav>
+      {/* Pass user data and functions to the NavBar component */}
+      <NavBar
+        username={user.username}
+        email={user.email}
+        notifications={notifications}
+        onLogout={handleLogout}
+        onApplyForLaptop={handleApplyForLaptop}
+        onStatusCheck={handleStatusCheck}
+      />
 
       {/* Application Status */}
       <div className="container mt-5">

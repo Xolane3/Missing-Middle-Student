@@ -109,8 +109,8 @@ export default function ApplyForLaptop() {
               required
             >
               <option value="">Select Citizenship</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
+              <option value="Yes">Citizen</option>
+              <option value="No">Not Citizen</option>
             </select>
           </div>
 
@@ -127,10 +127,15 @@ export default function ApplyForLaptop() {
               required
             >
               <option value="">Select Campus</option>
-              <option value="Campus 1">Campus 1</option>
-              <option value="Campus 2">Campus 2</option>
-              <option value="Campus 3">Campus 3</option>
-              <option value="Campus 4">Campus 4</option>
+              <option value="Campus 1">Main Campus</option>
+              <option value="Campus 2">Soshanguve North Campus</option>
+              <option value="Campus 3">Soshanguve South Campus</option>
+              <option value="Campus 4">Arcadia Campus</option>
+              <option value="Campus 5">Ga-Rankuwa Campus</option>
+              <option value="Campus 6">Arcadia Campus</option>
+              <option value="Campus 7">Limpopo Campus</option>
+              <option value="Campus 8">eMalahleni Campus</option>
+
             </select>
           </div>
 

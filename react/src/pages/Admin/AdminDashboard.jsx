@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 export default function AdminDashboard() {
     return (
       <div className="min-h-screen bg-gray-100">
@@ -14,7 +17,8 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-bold">Reports</h2>
             <ul className="mt-2">
               <li><a href="#" className="text-blue-500">View All Applications</a></li>
-              <li><a href="#" className="text-blue-500">Generate Usage Reports</a></li>
+              {/*<li><a href="#" className="text-blue-500">Generate Usage Reports</a></li>*/}
+              <li><Link to ='/pages/admin'>Generate Usage Reports</Link></li>
             </ul>
           </section>
         </main>

@@ -7,6 +7,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import TechnicianLogin from "./pages/Technician/TechnicianLogin";
 import TechnicianDashboard from "./pages/Technician/TechnicianDashboard";
 import Apply from "./pages/Student/apply-laptop/apply";
+import GenerateReports from "./pages/Admin/GenerateReports";
 
 
 export const router = createBrowserRouter([
@@ -19,5 +20,6 @@ export const router = createBrowserRouter([
   { path: "/technician/login", element: <TechnicianLogin /> },
   { path: "/technician/dashboard", element: <TechnicianDashboard /> },
   { path: "/student/apply-laptop", element: <Apply /> },
+  { path: "/pages/admin", element: <GenerateReports /> },
   
 ]);

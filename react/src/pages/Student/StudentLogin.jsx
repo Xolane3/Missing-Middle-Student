@@ -11,7 +11,7 @@ export default function StudentLogin() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (studentEmail === "student@example.com" && studentPassword === "password") {
+    if (studentEmail === "" && studentPassword === "") {
       navigate("/student/dashboard");
     } else {
       setErrorMessage("Invalid email or password. Please try again.");
@@ -57,7 +57,7 @@ export default function StudentLogin() {
                 placeholder="Enter your email"
                 value={studentEmail}
                 onChange={(e) => setStudentEmail(e.target.value)}
-                required
+               
               />
             </div>
 
@@ -72,7 +72,7 @@ export default function StudentLogin() {
                 placeholder="Enter your password"
                 value={studentPassword}
                 onChange={(e) => setStudentPassword(e.target.value)}
-                required
+               
               />
             </div>
 

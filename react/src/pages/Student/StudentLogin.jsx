@@ -4,9 +4,24 @@ import { useNavigate } from "react-router-dom";
 export default function StudentLogin() {
   const navigate = useNavigate();
 
+  const [role, setRole] = useState("student");
   const [studentEmail, setStudentEmail] = useState("");
   const [studentPassword, setStudentPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const handleRoleChange = (e) => {
+    const selectedRole = e.target.value;
+    setRole(selectedRole);
+
+    // Navigate to the corresponding login page
+    if (selectedRole === "admin") {
+      navigate("/admin/login");
+    } else if (selectedRole === "technician") {
+      navigate("/technician/login");
+    } else if (selectedRole === "student") {
+      navigate("/student/login");
+    }
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,28 +37,60 @@ export default function StudentLogin() {
     <div className="d-flex justify-content-center align-items-center min-vh-100">
       <div className="container-fluid d-flex justify-content-center align-items-center">
         <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
-          <h3 className="text-center mb-4">Student Login</h3>
+          <h3 className="text-center mb-4">Login</h3>
+
+          <div className="mb-4 d-flex justify-content-center gap-3">
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="role"
+                id="admin"
+                value="admin"
+                checked={role === "admin"}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor="admin">
+                Admin
+              </label>
+            </div>
+
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="role"
+                id="technician"
+                value="technician"
+                checked={role === "technician"}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor="technician">
+                Technician
+              </label>
+            </div>
+
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="role"
+                id="student"
+                value="student"
+                checked={role === "student"}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor="student">
+                Student
+              </label>
+            </div>
+          </div>
 
           {errorMessage && (
             <div className="alert alert-danger text-center" role="alert">
               {errorMessage}
             </div>
           )}
-
-          <div className="d-flex justify-content-between mb-4">
-            <button
-              className="btn btn-secondary w-100 me-2"
-              onClick={() => navigate("/admin/login")}
-            >
-              Admin Login
-            </button>
-            <button
-              className="btn btn-secondary w-100 ms-2"
-              onClick={() => navigate("/technician/login")}
-            >
-              Technician Login
-            </button>
-          </div>
 
           <form onSubmit={handleLogin}>
             <div className="mb-3">
@@ -57,7 +104,6 @@ export default function StudentLogin() {
                 placeholder="Enter your email"
                 value={studentEmail}
                 onChange={(e) => setStudentEmail(e.target.value)}
-               
               />
             </div>
 
@@ -72,7 +118,6 @@ export default function StudentLogin() {
                 placeholder="Enter your password"
                 value={studentPassword}
                 onChange={(e) => setStudentPassword(e.target.value)}
-               
               />
             </div>
 

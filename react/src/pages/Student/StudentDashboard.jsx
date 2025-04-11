@@ -34,7 +34,7 @@ export default function StudentDashboard() {
 
   const handleStatusCheck = () => {
     // Navigate to a page to view the application status
-    navigate("/status");
+    navigate("/student/application-status");
   };
 
   return (

@@ -19,7 +19,7 @@ const NavBar = ({ username, email, notifications, onStatusCheck }) => {
         <span className="text-muted me-4">{email}</span>
 
         <div className="d-flex gap-4">
-          <Link to="/student/notification" className="nav-link custom-link">
+          <Link to="/student/notifications" className="nav-link custom-link">
             <BsBell className="me-1" /> Notifications ({notifications})
           </Link>
 
@@ -27,7 +27,7 @@ const NavBar = ({ username, email, notifications, onStatusCheck }) => {
             <BsLaptop className="me-1" /> Apply for Laptop
           </Link>
 
-          <Link to="/student/status" className="nav-link custom-link" onClick={onStatusCheck}>
+          <Link to="/student/application-status" className="nav-link custom-link" onClick={onStatusCheck}>
             <BsClipboardCheck className="me-1" /> Application Status
           </Link>
 

@@ -37,7 +37,7 @@ export default function StudentLogin() {
     <div className="d-flex justify-content-center align-items-center min-vh-100">
       <div className="container-fluid d-flex justify-content-center align-items-center">
         <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
-          <h3 className="text-center mb-4">Login</h3>
+          <h3 className="text-center mb-4">Student Login</h3>
 
           <div className="mb-4 d-flex justify-content-center gap-3">
             <div className="form-check">

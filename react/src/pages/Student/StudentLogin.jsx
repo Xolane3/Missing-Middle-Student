@@ -35,7 +35,13 @@ export default function StudentLogin() {
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
-      <div className="container-fluid d-flex justify-content-center align-items-center">
+      <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
+        {/* Missing Middle Student Title */}
+        <div className="text-center mb-4">
+          <h4 className="fw-bold text-primary">Missing Middle Student</h4>
+        </div>
+
+        {/* Login Card */}
         <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
           <h3 className="text-center mb-4">Student Login</h3>
 
@@ -149,3 +155,5 @@ export default function StudentLogin() {
     </div>
   );
 }
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";    

@@ -11,6 +11,10 @@ import ApplicationStatus from "./pages/Student/application-status/status";
 import Notifications from "./pages/Student/notifications/notifications";
 import TechNotification from "./pages/Technician/notifications/notification";
 import NewDeviceRegister from "./pages/Technician/registerNewDevice/newDeviceRegister";
+import Applications  from "./pages/Admin/applications/applications";
+import Students from "./pages/Admin/students/students";
+import AdminNotifications from "./pages/Admin/notifications/notifications";
+
 
 
 
@@ -27,6 +31,10 @@ export const router = createBrowserRouter([
   { path: "/student/application-status", element: <ApplicationStatus /> },
   { path: "/technician/notifications", element: <TechNotification /> },
   { path: "/technician/registerNewDevice", element: <NewDeviceRegister /> },
+  { path: "/admin/applications", element: <Applications /> },
+  { path: "/admin/students", element: <Students /> },
+  { path: "/student/notifications", element: <Notifications /> },
+  { path: "/admin/notifications", element: <AdminNotifications /> },
 
 
   

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import Navbar from "../../../components/studentNavbar"; // Import the Navbar component
+import Navbar from "../../../components/studentNavbar";
 
 export default function ApplyForLaptop() {
   const navigate = useNavigate();
@@ -20,7 +19,9 @@ export default function ApplyForLaptop() {
   const [facultySelection, setFacultySelection] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
-  const [nsfasProofFile, setNsfasProofFile] = useState(null); // New state
+
+  const [nsfasProofFile, setNsfasProofFile] = useState(null);
+  const [recomProofFile, setRecomProofFile] = useState(null); // New state
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,25 +36,17 @@ export default function ApplyForLaptop() {
       return;
     }
 
-    // Handle form submission
+    if (missingMiddleStatus === "Yes, I have a recommendation" && !recomProofFile) {
+      alert("Please upload proof of your recommendation.");
+      return;
+    }
+
+    // TODO: Submit logic (FormData for files if needed)
     alert("Application submitted successfully!");
     navigate("/student/dashboard");
   };
 
   const toggleTermsModal = () => setShowTermsModal(!showTermsModal);
-
-  useEffect(() => {
-    // Simulate fetching user data from a DB or API
-    const dummyData = {
-      name: "John Doe",
-      email: "johndoe@example.com",
-      course: "Software Development",
-    };
-  
-    setStudentName(dummyData.name);
-    setStudentEmail(dummyData.email);
-    setCourse(dummyData.course);
-  }, []);
 
   return (
     <div>
@@ -61,22 +54,19 @@ export default function ApplyForLaptop() {
       <div className="container mt-5">
         <h2 className="mb-4">Apply for Laptop</h2>
         <form onSubmit={handleSubmit} className="w-75 mx-auto">
-          {/* --- All your existing fields (unchanged) --- */}
+
           {/* Student Name */}
           <div className="mb-3">
             <label htmlFor="studentName" className="form-label">Full Name</label>
-            <input type="text" className="form-control" id="studentName" placeholder="Enter your full name"
-              value={studentName} onChange={(e) => setStudentName(e.target.value)}   readOnly
-              />
+            <input type="text" className="form-control" id="studentName"
+              value={studentName} onChange={(e) => setStudentName(e.target.value)} />
           </div>
 
           {/* Student Email */}
           <div className="mb-3">
             <label htmlFor="studentEmail" className="form-label">Email Address</label>
-            <input type="email" className="form-control" id="studentEmail" placeholder="Enter your email address"
-              value={studentEmail} onChange={(e) => setStudentEmail(e.target.value)} 
-              readOnly
-              />
+            <input type="email" className="form-control" id="studentEmail"
+              value={studentEmail} onChange={(e) => setStudentEmail(e.target.value)} />
           </div>
 
           {/* Programme */}
@@ -125,14 +115,14 @@ export default function ApplyForLaptop() {
           {/* Course */}
           <div className="mb-3">
             <label htmlFor="course" className="form-label">Course</label>
-            <input type="text" className="form-control" id="course" placeholder="Enter your course"
-              value={course} onChange={(e) => setCourse(e.target.value)}   readOnly/>
+            <input type="text" className="form-control" id="course"
+              value={course} onChange={(e) => setCourse(e.target.value)} />
           </div>
 
           {/* Academic Performance */}
           <div className="mb-3">
-            <label htmlFor="academicPerformance" className="form-label">Academic Performance (Average %)</label>
-            <input type="number" className="form-control" id="academicPerformance" placeholder="Enter your average"
+            <label htmlFor="academicPerformance" className="form-label">Academic Performance (%)</label>
+            <input type="number" className="form-control" id="academicPerformance"
               value={academicPerformance} onChange={(e) => setAcademicPerformance(e.target.value)} />
           </div>
 
@@ -158,20 +148,34 @@ export default function ApplyForLaptop() {
             </select>
           </div>
 
-          {/* Conditional Proof Upload */}
+          {/* Conditional NSFAS Proof Upload */}
           {nsfasStatus === "Not on NSFAS" && (
             <div className="mb-3">
               <label htmlFor="nsfasProofFile" className="form-label">Upload Proof of NSFAS Status</label>
-              <input
-                type="file"
-                className="form-control"
-                id="nsfasProofFile"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={(e) => setNsfasProofFile(e.target.files[0])}
-              />
-              <small className="form-text text-muted">
-                Accepted formats: PDF, JPG, JPEG, PNG
-              </small>
+              <input type="file" className="form-control" id="nsfasProofFile"
+                accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => setNsfasProofFile(e.target.files[0])} />
+              <small className="form-text text-muted">Accepted formats: PDF, JPG, JPEG, PNG</small>
+            </div>
+          )}
+
+          {/* Recommendation Status */}
+          <div className="mb-3">
+            <label htmlFor="recomStatus" className="form-label">Recommendation Status</label>
+            <select className="form-control" id="recomStatus" value={missingMiddleStatus}
+              onChange={(e) => setMissingMiddleStatus(e.target.value)}>
+              <option value="">Select Recommendation Status</option>
+              <option value="Yes, I have a recommendation">Yes, I have a recommendation</option>
+              <option value="Not recommended">Not recommended</option>
+            </select>
+          </div>
+
+          {/* Conditional Recommendation Proof Upload */}
+          {missingMiddleStatus === "Yes, I have a recommendation" && (
+            <div className="mb-3">
+              <label htmlFor="recomProofFile" className="form-label">Upload Recommendation Proof</label>
+              <input type="file" className="form-control" id="recomProofFile"
+                accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => setRecomProofFile(e.target.files[0])} />
+              <small className="form-text text-muted">Accepted formats: PDF, JPG, JPEG, PNG</small>
             </div>
           )}
 
@@ -179,8 +183,7 @@ export default function ApplyForLaptop() {
           <div className="mb-3">
             <label htmlFor="facultySelection" className="form-label">Faculty Selection</label>
             <input type="text" className="form-control" id="facultySelection"
-              placeholder="Enter your faculty" value={facultySelection}
-              onChange={(e) => setFacultySelection(e.target.value)} />
+              value={facultySelection} onChange={(e) => setFacultySelection(e.target.value)} />
           </div>
 
           {/* Terms Checkbox */}
@@ -222,5 +225,3 @@ export default function ApplyForLaptop() {
     </div>
   );
 }
-// Compare this snippet from react/src/pages/Admin/AdminLogin.jsx:
-//                 <label className="form-check-label" htmlFor="admin">

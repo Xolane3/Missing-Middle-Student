@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import Navbar from "../../../components/studentNavbar"; // Import the Navbar component
 
 export default function ApplyForLaptop() {
@@ -41,6 +42,19 @@ export default function ApplyForLaptop() {
 
   const toggleTermsModal = () => setShowTermsModal(!showTermsModal);
 
+  useEffect(() => {
+    // Simulate fetching user data from a DB or API
+    const dummyData = {
+      name: "John Doe",
+      email: "johndoe@example.com",
+      course: "Software Development",
+    };
+  
+    setStudentName(dummyData.name);
+    setStudentEmail(dummyData.email);
+    setCourse(dummyData.course);
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -52,14 +66,17 @@ export default function ApplyForLaptop() {
           <div className="mb-3">
             <label htmlFor="studentName" className="form-label">Full Name</label>
             <input type="text" className="form-control" id="studentName" placeholder="Enter your full name"
-              value={studentName} onChange={(e) => setStudentName(e.target.value)} />
+              value={studentName} onChange={(e) => setStudentName(e.target.value)}   readOnly
+              />
           </div>
 
           {/* Student Email */}
           <div className="mb-3">
             <label htmlFor="studentEmail" className="form-label">Email Address</label>
             <input type="email" className="form-control" id="studentEmail" placeholder="Enter your email address"
-              value={studentEmail} onChange={(e) => setStudentEmail(e.target.value)} />
+              value={studentEmail} onChange={(e) => setStudentEmail(e.target.value)} 
+              readOnly
+              />
           </div>
 
           {/* Programme */}
@@ -109,7 +126,7 @@ export default function ApplyForLaptop() {
           <div className="mb-3">
             <label htmlFor="course" className="form-label">Course</label>
             <input type="text" className="form-control" id="course" placeholder="Enter your course"
-              value={course} onChange={(e) => setCourse(e.target.value)} />
+              value={course} onChange={(e) => setCourse(e.target.value)}   readOnly/>
           </div>
 
           {/* Academic Performance */}

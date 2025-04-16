@@ -9,6 +9,9 @@ import TechnicianDashboard from "./pages/Technician/TechnicianDashboard";
 import Apply from "./pages/Student/apply-laptop/apply";
 import ApplicationStatus from "./pages/Student/application-status/status";
 import Notifications from "./pages/Student/notifications/notifications";
+import TechNotification from "./pages/Technician/notifications/notification";
+import NewDeviceRegister from "./pages/Technician/registerNewDevice/newDeviceRegister";
+
 
 
 export const router = createBrowserRouter([
@@ -22,6 +25,11 @@ export const router = createBrowserRouter([
   { path: "/technician/dashboard", element: <TechnicianDashboard /> },
   { path: "/student/apply-laptop", element: <Apply /> },
   { path: "/student/application-status", element: <ApplicationStatus /> },
-  { path: "/student/notifications", element: <Notifications /> }
+  { path: "/technician/notifications", element: <TechNotification /> },
+  { path: "/technician/registerNewDevice", element: <NewDeviceRegister /> },
+
+
+  
+
   
 ]);

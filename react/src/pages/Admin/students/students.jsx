@@ -3,59 +3,164 @@ import AdminNavbar from '../../../components/adminNavBar';
 
 export default function Students() {
   const [students, setStudents] = useState([]);
+  const [search, setSearch] = useState('');
+  const [courseFilter, setCourseFilter] = useState('all');
+  const [nsfasFilter, setNsfasFilter] = useState('all');
+  const [sortAsc, setSortAsc] = useState(true);
 
   useEffect(() => {
     const dummyData = [
       {
         id: 1,
-        name: "Thabo Mokoena",
+        studentNumber: '2023123456',
+        surname: 'Mokoena',
+        initials: 'T.',
         averageMark: 65,
-        course: "National Diploma",
+        course: 'National Diploma',
         yearOfStudy: 1,
+        nsfasFunded: false,
       },
       {
         id: 2,
-        name: "Lerato Dlamini",
+        studentNumber: '2023987654',
+        surname: 'Dlamini',
+        initials: 'L.',
         averageMark: 72,
-        course: "Advanced Diploma",
+        course: 'Advanced Diploma',
         yearOfStudy: 1,
+        nsfasFunded: true,
       },
       {
         id: 3,
-        name: "Nomusa Sithole",
+        studentNumber: '2023765432',
+        surname: 'Sithole',
+        initials: 'N.',
         averageMark: 68,
-        course: "National Diploma",
+        course: 'Higher Certificate',
         yearOfStudy: 2,
+        nsfasFunded: false,
+      },
+      {
+        id: 4,
+        studentNumber: '2023123111',
+        surname: 'Zulu',
+        initials: 'A.',
+        averageMark: 80,
+        course: 'BTech',
+        yearOfStudy: 1,
+        nsfasFunded: false,
+      },
+      {
+        id: 5,
+        studentNumber: '2023999999',
+        surname: 'Khumalo',
+        initials: 'Z.',
+        averageMark: 90,
+        course: 'Advanced Diploma',
+        yearOfStudy: 1,
+        nsfasFunded: false,
       },
     ];
     setStudents(dummyData);
   }, []);
 
+  const filteredStudents = students
+    .filter((s) =>
+      `${s.studentNumber} ${s.surname} ${s.initials}`
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    )
+    .filter((s) =>
+      courseFilter === 'all' ? true : s.course.toLowerCase() === courseFilter
+    )
+    .filter((s) =>
+      nsfasFilter === 'all'
+        ? true
+        : nsfasFilter === 'funded'
+        ? s.nsfasFunded
+        : !s.nsfasFunded
+    )
+    .sort((a, b) => (sortAsc ? a.averageMark - b.averageMark : b.averageMark - a.averageMark));
+
   return (
-    <div className="p-6">
-        <AdminNavbar />
-      <h1 className="text-2xl font-bold">Student List</h1>
-      <h2 className="text-xl font-bold">First-Year Registered Students</h2>
-      <table className="w-full mt-4 border text-sm">
-        <thead>
-          <tr>
-            <th className="border px-2 py-1">Name</th>
-            <th className="border px-2 py-1">Course</th>
-            <th className="border px-2 py-1">Year</th>
-            <th className="border px-2 py-1">Average</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.filter((s) => s.yearOfStudy === 1).map((s) => (
-            <tr key={s.id}>
-              <td className="border px-2 py-1">{s.name}</td>
-              <td className="border px-2 py-1">{s.course}</td>
-              <td className="border px-2 py-1">{s.yearOfStudy}</td>
-              <td className="border px-2 py-1">{s.averageMark}%</td>
+    <div className="p-4">
+      <AdminNavbar />
+      <h1 className="text-2xl font-bold text-center mb-4">Registered TUT Students</h1>
+
+      {/* Search & Filters */}
+      <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+        <input
+          type="text"
+          placeholder="Search by name or student number"
+          className="form-control md:w-1/3"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <select
+          className="form-select md:w-1/4"
+          value={courseFilter}
+          onChange={(e) => setCourseFilter(e.target.value)}
+        >
+          <option value="all">All Courses</option>
+          <option value="national diploma">National Diploma</option>
+          <option value="advanced diploma">Advanced Diploma</option>
+        </select>
+
+        <select
+          className="form-select md:w-1/4"
+          value={nsfasFilter}
+          onChange={(e) => setNsfasFilter(e.target.value)}
+        >
+          <option value="all">All NSFAS Status</option>
+          <option value="funded">Funded Only</option>
+          <option value="unfunded">Unfunded Only</option>
+        </select>
+
+        <button
+          onClick={() => setSortAsc(!sortAsc)}
+          className="btn btn-outline-primary"
+        >
+          Sort by Avg: {sortAsc ? 'Low → High' : 'High → Low'}
+        </button>
+      </div>
+
+      {/* Table */}
+      <div className="table-responsive d-flex justify-content-center">
+        <table className="table table-bordered table-hover text-center w-auto">
+          <thead className="table-light">
+            <tr>
+              <th>Student #</th>
+              <th>Surname</th>
+              <th>Initials</th>
+              <th>Course</th>
+              <th>Year</th>
+              <th>Average</th>
+              <th>NSFAS Funded</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredStudents.map((s) => (
+              <tr key={s.id}>
+                <td>{s.studentNumber}</td>
+                <td>{s.surname}</td>
+                <td>{s.initials}</td>
+                <td>{s.course}</td>
+                <td>{s.yearOfStudy}</td>
+                <td>{s.averageMark}%</td>
+                <td>{s.nsfasFunded ? 'Yes' : 'No'}</td>
+              </tr>
+            ))}
+            {filteredStudents.length === 0 && (
+              <tr>
+                <td colSpan="7" className="text-muted py-2">
+                  No students found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

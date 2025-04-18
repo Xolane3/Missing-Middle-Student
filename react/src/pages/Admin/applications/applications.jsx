@@ -3,28 +3,127 @@ import AdminNavbar from '../../../components/adminNavBar';
 
 export default function Applications() {
   const [applications, setApplications] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [eligibilityFilter, setEligibilityFilter] = useState('all');
 
   useEffect(() => {
     const dummyData = [
       {
         id: 1,
-        name: "Thabo Mokoena",
+        studentNumber: '2023123456',
+        surname: 'Mokoena',
+        initials: 'T.',
         nsfasFunded: false,
         averageMark: 65,
         income: 450000,
-        course: "National Diploma",
+        course: 'National Diploma',
         yearOfStudy: 1,
-        status: "pending",
+        recommendationLetter: true,
+        status: 'pending',
       },
       {
         id: 2,
-        name: "Lerato Dlamini",
+        studentNumber: '2023987654',
+        surname: 'Dlamini',
+        initials: 'L.',
         nsfasFunded: true,
         averageMark: 72,
         income: 380000,
-        course: "Advanced Diploma",
+        course: 'Advanced Diploma',
         yearOfStudy: 1,
-        status: "pending",
+        recommendationLetter: false,
+        status: 'pending',
+      },
+      {
+        id: 3,
+        studentNumber: '2023765432',
+        surname: 'Ndlovu',
+        initials: 'S.',
+        nsfasFunded: false,
+        averageMark: 59,
+        income: 500000,
+        course: 'National Diploma',
+        yearOfStudy: 1,
+        recommendationLetter: true,
+        status: 'pending',
+      },
+      {
+        id: 4,
+        studentNumber: '2023123111',
+        surname: 'Zulu',
+        initials: 'A.',
+        nsfasFunded: false,
+        averageMark: 80,
+        income: 360000,
+        course: 'Advanced Diploma',
+        yearOfStudy: 1,
+        recommendationLetter: false,
+        status: 'pending',
+      },
+      {
+        id: 5,
+        studentNumber: '2023777777',
+        surname: 'Molefe',
+        initials: 'K.',
+        nsfasFunded: false,
+        averageMark: 67,
+        income: 349000,
+        course: 'Advanced Diploma',
+        yearOfStudy: 1,
+        recommendationLetter: true,
+        status: 'pending',
+      },
+      {
+        id: 6,
+        studentNumber: '2023999999',
+        surname: 'Khumalo',
+        initials: 'Z.',
+        nsfasFunded: false,
+        averageMark: 90,
+        income: 400000,
+        course: 'National Diploma',
+        yearOfStudy: 1,
+        recommendationLetter: true,
+        status: 'pending',
+      },
+      {
+        id: 7,
+        studentNumber: '2023001122',
+        surname: 'Mthembu',
+        initials: 'M.',
+        nsfasFunded: false,
+        averageMark: 70,
+        income: 550000,
+        course: 'National Diploma',
+        yearOfStudy: 2,
+        recommendationLetter: false,
+        status: 'pending',
+      },
+      {
+        id: 8,
+        studentNumber: '2023222233',
+        surname: 'Dube',
+        initials: 'N.',
+        nsfasFunded: false,
+        averageMark: 64,
+        income: 370000,
+        course: 'Advanced Diploma',
+        yearOfStudy: 1,
+        recommendationLetter: true,
+        status: 'pending',
+      },
+      {
+        id: 9,
+        studentNumber: '2023444455',
+        surname: 'Mokoena',
+        initials: 'T.',
+        nsfasFunded: false,
+        averageMark: 75,
+        income: 399999,
+        course: 'National Diploma',
+        yearOfStudy: 1,
+        recommendationLetter: true,
+        status: 'pending',
       },
     ];
     setApplications(dummyData);
@@ -36,7 +135,7 @@ export default function Applications() {
       app.averageMark >= 60 &&
       app.income >= 350000 &&
       app.income < 600000 &&
-      ["National Diploma", "Advanced Diploma"].includes(app.course) &&
+      ['National Diploma', 'Advanced Diploma'].includes(app.course) &&
       app.yearOfStudy === 1
     );
   };
@@ -49,47 +148,95 @@ export default function Applications() {
     );
   };
 
+  const filteredApplications = applications.filter((app) => {
+    const matchesSearch =
+      app.studentNumber.includes(searchQuery) ||
+      app.surname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      app.initials.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesEligibility =
+      eligibilityFilter === 'all'
+        ? true
+        : eligibilityFilter === 'eligible'
+        ? isEligible(app)
+        : !isEligible(app);
+
+    return matchesSearch && matchesEligibility;
+  });
+
   return (
     <div>
       <AdminNavbar />
-      <div className="p-6">
-        <h2 className="text-2xl font-bold mb-4">Review Laptop Applications</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300 rounded shadow-md">
-            <thead>
-              <tr className="bg-gray-100 text-left">
-                <th className="p-3 border-b">Name</th>
-                <th className="p-3 border-b">NSFAS Funded</th>
-                <th className="p-3 border-b">Average Mark</th>
-                <th className="p-3 border-b">Income</th>
-                <th className="p-3 border-b">Course</th>
-                <th className="p-3 border-b">Year</th>
-                <th className="p-3 border-b">Eligible</th>
-                <th className="p-3 border-b">Status</th>
-                <th className="p-3 border-b">Action</th>
+      <div className="container mt-5">
+        <h2 className="text-center mb-4">Review Laptop Applications</h2>
+
+        {/* Filters */}
+        <div className="row mb-3">
+          <div className="col-md-6">
+            <input
+              type="text"
+              placeholder="Search by Student Number, Surname, or Initials"
+              className="form-control"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <div className="col-md-3">
+            <select
+              className="form-select"
+              value={eligibilityFilter}
+              onChange={(e) => setEligibilityFilter(e.target.value)}
+            >
+              <option value="all">All</option>
+              <option value="eligible">Eligible</option>
+              <option value="notEligible">Not Eligible</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="table-responsive">
+          <table className="table table-bordered table-hover text-center">
+            <thead className="table-light">
+              <tr>
+                <th>Student Number</th>
+                <th>Surname</th>
+                <th>Initials</th>
+                <th>NSFAS Funded</th>
+                <th>Avg. Mark</th>
+                <th>Income</th>
+                <th>Course</th>
+                <th>Year</th>
+                <th>Recommendation</th>
+                <th>Eligible</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {applications.map((app) => (
-                <tr key={app.id} className="border-t hover:bg-gray-50">
-                  <td className="p-3">{app.name}</td>
-                  <td className="p-3">{app.nsfasFunded ? 'Yes' : 'No'}</td>
-                  <td className="p-3">{app.averageMark}%</td>
-                  <td className="p-3">R{app.income.toLocaleString()}</td>
-                  <td className="p-3">{app.course}</td>
-                  <td className="p-3">{app.yearOfStudy}</td>
-                  <td className="p-3">{isEligible(app) ? '✅' : '❌'}</td>
-                  <td className="p-3 capitalize">{app.status}</td>
-                  <td className="p-3 space-x-2">
+              {filteredApplications.map((app) => (
+                <tr key={app.id}>
+                  <td>{app.studentNumber}</td>
+                  <td>{app.surname}</td>
+                  <td>{app.initials}</td>
+                  <td>{app.nsfasFunded ? 'Yes' : 'No'}</td>
+                  <td>{app.averageMark}%</td>
+                  <td>R{app.income.toLocaleString()}</td>
+                  <td>{app.course}</td>
+                  <td>{app.yearOfStudy}</td>
+                  <td>{app.recommendationLetter ? '✔️' : '❌'}</td>
+                  <td>{isEligible(app) ? '✅' : '❌'}</td>
+                  <td className="text-capitalize">{app.status}</td>
+                  <td>
                     <button
-                      className="bg-blue-600 text-white px-3 py-1 rounded disabled:opacity-50"
+                      className="btn btn-primary btn-sm me-2"
                       onClick={() => handleDecision(app.id, 'approved')}
                       disabled={!isEligible(app)}
                     >
                       Approve
                     </button>
                     <button
-                      className="bg-red-600 text-white px-3 py-1 rounded"
+                      className="btn btn-danger btn-sm"
                       onClick={() => handleDecision(app.id, 'rejected')}
                     >
                       Reject
@@ -97,10 +244,10 @@ export default function Applications() {
                   </td>
                 </tr>
               ))}
-              {applications.length === 0 && (
+              {filteredApplications.length === 0 && (
                 <tr>
-                  <td colSpan="9" className="p-4 text-center text-gray-500">
-                    No applications found.
+                  <td colSpan="12" className="text-muted">
+                    No matching applications found.
                   </td>
                 </tr>
               )}

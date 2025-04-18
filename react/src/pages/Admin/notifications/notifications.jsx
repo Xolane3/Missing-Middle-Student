@@ -6,9 +6,16 @@ const Notifications = () => {
         {
             id: 1,
             title: 'Laptop Application',
-            message: 'Please upload missing ID document.',
+            message: 'Missing ID document.',
             read: false,
             type: 'Task',
+            studentName: 'John Doe',
+            applicationDate: '2025-04-10',
+            uploadedDocuments: {
+                ID: false,
+                ProofOfRegistration: true,
+                FinancialStatement: true,
+            },
         },
         {
             id: 2,
@@ -23,6 +30,20 @@ const Notifications = () => {
             message: "Don't forget to collect your laptop before 20th October 2025.",
             read: false,
             type: 'Event',
+        },
+        {
+            id: 4,
+            title: 'Laptop Application',
+            message: 'All documents submitted.',
+            read: false,
+            type: 'Task',
+            studentName: 'Jane Smith',
+            applicationDate: '2025-04-12',
+            uploadedDocuments: {
+                ID: true,
+                ProofOfRegistration: true,
+                FinancialStatement: true,
+            },
         },
     ]);
 
@@ -46,12 +67,20 @@ const Notifications = () => {
 
     const filteredNotifications = notifications.filter((notif) => {
         if (filter === 'Unread') return !notif.read;
-        return true; // 'All'
+        return true;
     });
+
+    const renderUploadedDocuments = (docs) => {
+        return Object.entries(docs).map(([key, value]) => (
+            <li key={key} style={{ color: value ? 'green' : 'red' }}>
+                {key}: {value ? 'Uploaded' : 'Missing'}
+            </li>
+        ));
+    };
 
     return (
         <div>
-          <AdminNavbar />
+            <AdminNavbar />
             <div style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1>
                     Notifications{' '}
@@ -97,7 +126,8 @@ const Notifications = () => {
                             style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
-                                alignItems: 'center',
+                                alignItems: 'flex-start',
+                                flexDirection: 'column',
                                 border: '1px solid #ccc',
                                 borderRadius: '5px',
                                 padding: '10px',
@@ -120,12 +150,23 @@ const Notifications = () => {
                                     : '#fff')
                             }
                         >
-                            <div>
+                            <div style={{ width: '100%' }}>
                                 <h3 style={{ margin: '0 0 5px 0' }}>{notif.title}</h3>
-                                <p style={{ margin: '0', color: '#555' }}>{notif.message}</p>
+                                <p style={{ margin: '0 0 8px 0', color: '#555' }}>{notif.message}</p>
+
+                                {notif.type === 'Task' && notif.studentName && (
+                                    <div style={{ backgroundColor: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
+                                        <p><strong>Student Name:</strong> {notif.studentName}</p>
+                                        <p><strong>Application Date:</strong> {notif.applicationDate}</p>
+                                        <p><strong>Uploaded Documents:</strong></p>
+                                        <ul style={{ paddingLeft: '20px', marginTop: '5px' }}>
+                                            {renderUploadedDocuments(notif.uploadedDocuments)}
+                                        </ul>
+                                    </div>
+                                )}
                             </div>
 
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <div style={{ alignSelf: 'flex-end', marginTop: '10px' }}>
                                 {notif.read && (
                                     <small style={{ color: 'green', marginRight: '10px' }}>
                                         ✓ Read
@@ -133,7 +174,7 @@ const Notifications = () => {
                                 )}
                                 <span
                                     onClick={(e) => {
-                                        e.stopPropagation(); // Prevent triggering read
+                                        e.stopPropagation();
                                         handleDismiss(notif.id);
                                     }}
                                     style={{

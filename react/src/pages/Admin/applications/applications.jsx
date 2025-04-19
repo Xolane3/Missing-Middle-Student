@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import AdminNavbar from '../../../components/adminNavBar';
+import AdminFooter from '../../../components/adminFooter'; // ✅ Import footer
 
 export default function Applications() {
   const [applications, setApplications] = useState([]);
@@ -165,95 +166,101 @@ export default function Applications() {
   });
 
   return (
-    <div>
-      <AdminNavbar />
-      <div className="container mt-5">
-        <h2 className="text-center mb-4">Review Laptop Applications</h2>
+    <div className="d-flex flex-column min-vh-100">
+      <div>
+        <AdminNavbar />
+        <div className="container mt-5 mb-5">
+          <h2 className="text-center mb-4">Review Laptop Applications</h2>
 
-        {/* Filters */}
-        <div className="row mb-3">
-          <div className="col-md-6">
-            <input
-              type="text"
-              placeholder="Search by Student Number, Surname, or Initials"
-              className="form-control"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+          {/* Filters */}
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <input
+                type="text"
+                placeholder="Search by Student Number, Surname, or Initials"
+                className="form-control"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <div className="col-md-3">
+              <select
+                className="form-select"
+                value={eligibilityFilter}
+                onChange={(e) => setEligibilityFilter(e.target.value)}
+              >
+                <option value="all">All</option>
+                <option value="eligible">Eligible</option>
+                <option value="notEligible">Not Eligible</option>
+              </select>
+            </div>
           </div>
-          <div className="col-md-3">
-            <select
-              className="form-select"
-              value={eligibilityFilter}
-              onChange={(e) => setEligibilityFilter(e.target.value)}
-            >
-              <option value="all">All</option>
-              <option value="eligible">Eligible</option>
-              <option value="notEligible">Not Eligible</option>
-            </select>
-          </div>
-        </div>
 
-        {/* Table */}
-        <div className="table-responsive">
-          <table className="table table-bordered table-hover text-center">
-            <thead className="table-light">
-              <tr>
-                <th>Student Number</th>
-                <th>Surname</th>
-                <th>Initials</th>
-                <th>NSFAS Funded</th>
-                <th>Avg. Mark</th>
-                <th>Income</th>
-                <th>Course</th>
-                <th>Year</th>
-                <th>Recommendation</th>
-                <th>Eligible</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredApplications.map((app) => (
-                <tr key={app.id}>
-                  <td>{app.studentNumber}</td>
-                  <td>{app.surname}</td>
-                  <td>{app.initials}</td>
-                  <td>{app.nsfasFunded ? 'Yes' : 'No'}</td>
-                  <td>{app.averageMark}%</td>
-                  <td>R{app.income.toLocaleString()}</td>
-                  <td>{app.course}</td>
-                  <td>{app.yearOfStudy}</td>
-                  <td>{app.recommendationLetter ? '✔️' : '❌'}</td>
-                  <td>{isEligible(app) ? '✅' : '❌'}</td>
-                  <td className="text-capitalize">{app.status}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary btn-sm me-2"
-                      onClick={() => handleDecision(app.id, 'approved')}
-                      disabled={!isEligible(app)}
-                    >
-                      Approve
-                    </button>
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={() => handleDecision(app.id, 'rejected')}
-                    >
-                      Reject
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {filteredApplications.length === 0 && (
+          {/* Table */}
+          <div className="table-responsive">
+            <table className="table table-bordered table-hover text-center">
+              <thead className="table-light">
                 <tr>
-                  <td colSpan="12" className="text-muted">
-                    No matching applications found.
-                  </td>
+                  <th>Student Number</th>
+                  <th>Surname</th>
+                  <th>Initials</th>
+                  <th>NSFAS Funded</th>
+                  <th>Avg. Mark</th>
+                  <th>Income</th>
+                  <th>Course</th>
+                  <th>Year</th>
+                  <th>Recommendation</th>
+                  <th>Eligible</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredApplications.map((app) => (
+                  <tr key={app.id}>
+                    <td>{app.studentNumber}</td>
+                    <td>{app.surname}</td>
+                    <td>{app.initials}</td>
+                    <td>{app.nsfasFunded ? 'Yes' : 'No'}</td>
+                    <td>{app.averageMark}%</td>
+                    <td>R{app.income.toLocaleString()}</td>
+                    <td>{app.course}</td>
+                    <td>{app.yearOfStudy}</td>
+                    <td>{app.recommendationLetter ? '✔️' : '❌'}</td>
+                    <td>{isEligible(app) ? '✅' : '❌'}</td>
+                    <td className="text-capitalize">{app.status}</td>
+                    <td>
+                      <button
+                        className="btn btn-primary btn-sm me-2"
+                        onClick={() => handleDecision(app.id, 'approved')}
+                        disabled={!isEligible(app)}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => handleDecision(app.id, 'rejected')}
+                      >
+                        Reject
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {filteredApplications.length === 0 && (
+                  <tr>
+                    <td colSpan="12" className="text-muted">
+                      No matching applications found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
+
+      <div className="mt-auto"> {/* Ensures footer stays at bottom */}
+        <AdminFooter />
       </div>
     </div>
   );

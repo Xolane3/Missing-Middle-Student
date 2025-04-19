@@ -167,7 +167,7 @@ export default function Applications() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <div>
+      <div className="p-4">
         <AdminNavbar />
         <div className="container mt-5 mb-5">
           <h2 className="text-center mb-4">Review Laptop Applications</h2>

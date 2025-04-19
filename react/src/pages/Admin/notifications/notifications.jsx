@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import AdminNavbar from '../../../components/adminNavBar';
 import AdminFooter from '../../../components/adminFooter'; // ✅ Import footer
 
@@ -128,13 +129,21 @@ const Notifications = () => {
                     </div>
                 </div>
 
-                <div style={{ padding: '0 20px' }}>
+                <div style={{ padding: '0 20px', maxHeight: '60vh', overflowY: 'auto' }}>
                     {filteredNotifications.length === 0 ? (
                         <p style={{ color: '#777' }}>No notifications to display.</p>
                     ) : (
-                        filteredNotifications.map((notif) => (
-                            <div
+                        filteredNotifications.map((notif, index) => (
+                            <motion.div
                                 key={notif.id}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    duration: 0.4,
+                                    delay: index * 0.1,
+                                    ease: 'easeOut'
+                                }}
                                 onClick={() => handleNotificationClick(notif.id)}
                                 style={{
                                     display: 'flex',
@@ -206,7 +215,7 @@ const Notifications = () => {
                                         ✕
                                     </span>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))
                     )}
                 </div>

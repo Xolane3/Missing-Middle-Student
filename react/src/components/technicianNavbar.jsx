@@ -1,9 +1,26 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { BsBoxArrowRight, BsBell, BsLaptop, BsClipboardCheck } from "react-icons/bs";
+import Swal from "sweetalert2"; // <-- Make sure SweetAlert2 is installed
+import { BsBoxArrowRight, BsBell, BsClipboardCheck } from "react-icons/bs";
 
-const TechNavBar = ({ username, email, notifications, onStatusCheck }) => {
+const TechNavBar = ({ username = "Technician", email = "tech@example.com", notifications = 0, onStatusCheck }) => {
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Are you sure you want to log out?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, log out',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/student/login");
+      }
+    });
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-light p-3 shadow-sm">
@@ -23,15 +40,17 @@ const TechNavBar = ({ username, email, notifications, onStatusCheck }) => {
             <BsBell className="me-1" /> Notifications ({notifications})
           </Link>
 
-        
-
           <Link to="/technician/registerNewDevice" className="nav-link custom-link" onClick={onStatusCheck}>
-            <BsClipboardCheck className="me-1" /> Register New device
+            <BsClipboardCheck className="me-1" /> Register New Device
           </Link>
 
-          <Link to="/student/login" className="nav-link custom-link text-danger">
+          <span
+            className="nav-link custom-link text-danger"
+            role="button"
+            onClick={handleLogout}
+          >
             <BsBoxArrowRight className="me-1" /> Logout
-          </Link>
+          </span>
         </div>
       </div>
     </nav>

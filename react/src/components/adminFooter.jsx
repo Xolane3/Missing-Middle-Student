@@ -6,12 +6,13 @@ export default function AdminFooter() {
   return (
     <footer className="mt-auto bg-light border-top py-3 w-100">
       <div className="container d-flex justify-content-between align-items-center position-relative">
-        {/* Left: Notification Icon */}
+        {/* Left: Notification Icon 
         <div className="position-absolute start-0">
           <Link to="/admin/notifications" className="nav-link">
             <Bell />
           </Link>
         </div>
+        */}
 
         {/* Center: Admin Text */}
         <div className="mx-auto">

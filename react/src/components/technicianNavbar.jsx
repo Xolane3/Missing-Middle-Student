@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2"; // <-- Make sure SweetAlert2 is installed
-import { BsBoxArrowRight, BsBell, BsClipboardCheck } from "react-icons/bs";
+import { BsBoxArrowRight, BsBell, BsClipboardCheck,BsLaptop } from "react-icons/bs";
+
 
 const TechNavBar = ({ username = "Technician", email = "tech@example.com", notifications = 0, onStatusCheck }) => {
   const navigate = useNavigate();
@@ -36,6 +37,10 @@ const TechNavBar = ({ username = "Technician", email = "tech@example.com", notif
         <span className="text-muted me-4">{email}</span>
 
         <div className="d-flex gap-4">
+          <Link to="/technician/viewDevices" className="nav-link custom-link">
+            <BsLaptop className="me-1" /> View Devices
+          </Link>
+
           <Link to="/technician/notifications" className="nav-link custom-link">
             <BsBell className="me-1" /> Notifications ({notifications})
           </Link>

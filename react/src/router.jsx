@@ -14,6 +14,7 @@ import NewDeviceRegister from "./pages/Technician/registerNewDevice/newDeviceReg
 import Applications  from "./pages/Admin/applications/applications";
 import Students from "./pages/Admin/students/students";
 import AdminNotifications from "./pages/Admin/notifications/notifications";
+import TechViewDevices from "./pages/Technician/viewDevices/viewAllDevices";
 
 
 
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
   { path: "/admin/students", element: <Students /> },
   { path: "/student/notifications", element: <Notifications /> },
   { path: "/admin/notifications", element: <AdminNotifications /> },
+  { path: "/technician/viewDevices", element: <TechViewDevices /> },
 
 
   

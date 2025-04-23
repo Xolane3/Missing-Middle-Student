@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from "react";
 import AdminNavbar from "../../components/adminNavBar";
 import AdminFooter from "../../components/adminFooter";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer
+} from "recharts";
 import { CSVLink } from "react-csv";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -44,6 +56,14 @@ export default function Dashboard() {
     { name: "Total Applications", value: applications.length }
   ];
 
+  const barData = applications.map(app => ({
+    name: app.studentNumber,
+    "Average Mark": app.averageMark,
+    "Income": app.income,
+    "NSFAS Funded": app.nsfasFunded ? 1 : 0,
+    fill: isEligible(app) ? "#4caf50" : "#f44336"
+  }));
+
   const COLORS = ["#4caf50", "#f44336", "#2196f3"];
 
   const exportToPDF = () => {
@@ -82,7 +102,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <div className="d-flex flex-column min-vh-100 overflow-hidden">
       <AdminNavbar />
       <div className="container my-4 flex-grow-1">
         <h1 className="text-center fw-bold mb-4">Admin Dashboard</h1>
@@ -99,8 +119,8 @@ export default function Dashboard() {
         </div>
 
         <div id="report-section">
-          <div className="row justify-content-center mb-5">
-            <PieChart width={600} height={250}>
+          <div className="row justify-content-center mb-4">
+            <PieChart width={600} height={250} className="mx-auto">
               <Pie
                 data={pieData}
                 cx={280}
@@ -121,82 +141,20 @@ export default function Dashboard() {
             </PieChart>
           </div>
 
-          <div className="row">
-            <div className="col-md-12 mb-5">
-              <h4>Eligible Students ({eligibleStudents.length})</h4>
-              <div className="table-responsive">
-                <table className="table table-bordered table-hover text-center">
-                  <thead className="table-light">
-                    <tr>
-                      <th>Student Number</th>
-                      <th>Surname</th>
-                      <th>Initials</th>
-                      <th>NSFAS Funded</th>
-                      <th>Avg. Mark</th>
-                      <th>Income</th>
-                      <th>Course</th>
-                      <th>Year</th>
-                      <th>Recommendation</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {eligibleStudents.map(student => (
-                      <tr key={student.id}>
-                        <td>{student.studentNumber}</td>
-                        <td>{student.surname}</td>
-                        <td>{student.initials}</td>
-                        <td>{student.nsfasFunded ? "Yes" : "No"}</td>
-                        <td>{student.averageMark}%</td>
-                        <td>R{student.income.toLocaleString()}</td>
-                        <td>{student.course}</td>
-                        <td>{student.yearOfStudy}</td>
-                        <td>{student.recommendationLetter ? "✔️" : "❌"}</td>
-                        <td>{student.status}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <h4>Not Eligible Students ({notEligibleStudents.length})</h4>
-              <div className="table-responsive">
-                <table className="table table-bordered table-hover text-center">
-                  <thead className="table-light">
-                    <tr>
-                      <th>Student Number</th>
-                      <th>Surname</th>
-                      <th>Initials</th>
-                      <th>NSFAS Funded</th>
-                      <th>Avg. Mark</th>
-                      <th>Income</th>
-                      <th>Course</th>
-                      <th>Year</th>
-                      <th>Recommendation</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {notEligibleStudents.map(student => (
-                      <tr key={student.id}>
-                        <td>{student.studentNumber}</td>
-                        <td>{student.surname}</td>
-                        <td>{student.initials}</td>
-                        <td>{student.nsfasFunded ? "Yes" : "No"}</td>
-                        <td>{student.averageMark}%</td>
-                        <td>R{student.income.toLocaleString()}</td>
-                        <td>{student.course}</td>
-                        <td>{student.yearOfStudy}</td>
-                        <td>{student.recommendationLetter ? "✔️" : "❌"}</td>
-                        <td>{student.status}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <div className="row mb-3">
+            <h4 className="text-center mb-3">Student Metrics (Average Mark, Income & NSFAS)</h4>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={barData} margin={{ top: 5, right: 30, left: 20, bottom: 50 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" angle={-45} textAnchor="end" height={70} />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="Average Mark" fill="#00C49F" />
+                <Bar dataKey="Income" fill="#FFBB28" />
+                <Bar dataKey="NSFAS Funded" fill="#8884d8" />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>

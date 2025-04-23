@@ -85,7 +85,7 @@ export default function Students() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <div className="p-4">
+      <div >
         <AdminNavbar />
         <h1 className="text-2xl font-bold text-center mb-4">Registered TUT Students</h1>
 

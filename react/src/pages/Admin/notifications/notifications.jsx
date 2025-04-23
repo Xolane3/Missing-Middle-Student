@@ -84,7 +84,7 @@ const Notifications = () => {
 
     return (
         <div className="d-flex flex-column min-vh-100">
-            <div className="p-4">
+            <div >
                 <AdminNavbar />
                 <div style={{
                     padding: '20px',

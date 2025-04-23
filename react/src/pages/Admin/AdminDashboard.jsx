@@ -102,7 +102,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className=" p-4 d-flex flex-column min-vh-100 overflow-hidden">
+    <div className=" d-flex flex-column min-vh-100 overflow-hidden">
       <AdminNavbar />
       <div className="container my-4 flex-grow-1">
         <h1 className="text-center fw-bold mb-4">Admin Dashboard</h1>

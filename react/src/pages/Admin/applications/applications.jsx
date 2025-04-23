@@ -229,7 +229,7 @@ export default function Applications() {
                     <td>{app.recommendationLetter ? '✔️' : '❌'}</td>
                     <td>{isEligible(app) ? '✅' : '❌'}</td>
                     <td className="text-capitalize">{app.status}</td>
-                    <td>
+                    <td className="d-flex justify-content-center gap-2">
                       <button
                         className="btn btn-primary btn-sm me-2"
                         onClick={() => handleDecision(app.id, 'approved')}

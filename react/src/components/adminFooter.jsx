@@ -59,7 +59,7 @@ export default function AdminFooter() {
       <footer className="mt-auto bg-light border-top py-3 w-100">
         <div className="container d-flex justify-content-between align-items-center position-relative">
           <div className="mx-auto">
-            <p className="mb-0 fw-medium text-center">admin</p>
+            <p className="mb-0 fw-medium text-center">EduConnect</p>
           </div>
         </div>
       </footer>

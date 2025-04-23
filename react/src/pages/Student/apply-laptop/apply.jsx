@@ -126,6 +126,14 @@ export default function ApplyForLaptop() {
               value={academicPerformance} onChange={(e) => setAcademicPerformance(e.target.value)} />
           </div>
 
+          {/* Upload Academic Record */}
+          <div className="mb-3">
+            <label htmlFor="academicRecordFile" className="form-label">Upload Academic Record</label>
+            <input type="file" className="form-control" id="academicRecordFile"
+              accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => setAcademicRecordFile(e.target.files[0])} />
+            <small className="form-text text-muted">Accepted formats: PDF, JPG, JPEG, PNG</small>
+          </div>
+
           {/* Financial Aid Status */}
           <div className="mb-3">
             <label htmlFor="financialAidStatus" className="form-label">Financial Aid Status</label>
@@ -181,7 +189,7 @@ export default function ApplyForLaptop() {
 
           {/* Faculty */}
           <div className="mb-3">
-            <label htmlFor="facultySelection" className="form-label">Faculty Selection</label>
+            <label htmlFor="facultySelection" className="form-label">Specialization</label>
             <input type="text" className="form-control" id="facultySelection"
               value={facultySelection} onChange={(e) => setFacultySelection(e.target.value)} />
           </div>

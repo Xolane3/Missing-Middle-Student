@@ -134,16 +134,6 @@ export default function ApplyForLaptop() {
             <small className="form-text text-muted">Accepted formats: PDF, JPG, JPEG, PNG</small>
           </div>
 
-          {/* Financial Aid Status */}
-          <div className="mb-3">
-            <label htmlFor="financialAidStatus" className="form-label">Financial Aid Status</label>
-            <select className="form-control" id="financialAidStatus" value={financialAidStatus}
-              onChange={(e) => setFinancialAidStatus(e.target.value)}>
-              <option value="">Select Financial Aid Status</option>
-              <option value="Verified">Verified</option>
-              <option value="Not Verified">Not Verified</option>
-            </select>
-          </div>
 
           {/* NSFAS Status */}
           <div className="mb-3">

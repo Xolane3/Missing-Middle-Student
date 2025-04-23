@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TechNavBar from "../../../components/technicianNavbar";
 import { toast, Toaster } from "react-hot-toast";
-import "../../../App.css";
 import {
   FaLaptop,
   FaCheckCircle,

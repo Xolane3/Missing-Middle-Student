@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import TechNavBar from "../../components/technicianNavbar";
 import { Toaster } from "react-hot-toast";
-import "../../App.css";
-import { Bar, Pie } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
+
 import { Chart as ChartJS } from "chart.js/auto";
+import {
+  FaLaptop,
+  FaCheckCircle,
+  FaTimesCircle,
+} from "react-icons/fa";
 
 export default function TechnicianDashboard() {
   const [devices] = useState([
@@ -108,26 +113,29 @@ export default function TechnicianDashboard() {
         {/* Stats Section */}
         <div className="row mb-4">
           <div className="col-md-4">
-            <div className="card text-center">
+            <div className="card text-center shadow-sm mb-4">
               <div className="card-body">
+                <FaLaptop className="display-4 text-primary mb-3" /> {/* Laptop Icon */}
                 <h5 className="card-title">Total Devices</h5>
-                <p className="card-text">{totalDevices}</p>
+                <p className="card-text display-4 text-primary">{totalDevices}</p>
               </div>
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card text-center">
+            <div className="card text-center shadow-sm mb-4">
               <div className="card-body">
+                <FaCheckCircle className="display-4 text-success mb-3" /> {/* Check Circle Icon */}
                 <h5 className="card-title">Allocated Devices</h5>
-                <p className="card-text">{allocatedDevices}</p>
+                <p className="card-text display-4 text-success">{allocatedDevices}</p>
               </div>
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card text-center">
+            <div className="card text-center shadow-sm mb-4">
               <div className="card-body">
+                <FaTimesCircle className="display-4 text-danger mb-3" /> {/* Times Circle Icon */}
                 <h5 className="card-title">Unallocated Devices</h5>
-                <p className="card-text">{unallocatedDevices}</p>
+                <p className="card-text display-4 text-danger">{unallocatedDevices}</p>
               </div>
             </div>
           </div>
@@ -137,39 +145,58 @@ export default function TechnicianDashboard() {
         <div className="row mb-5">
           <div className="col-md-6">
             <h4>Device Conditions</h4>
-            <Bar
-  data={conditionData}
-  options={{
-    responsive: true,
-    scales: {
-      y: {
-        beginAtZero: true,
-        suggestedMax: Math.max(
-          conditionCount["Good"] || 0,
-          conditionCount["Fair"] || 0,
-          conditionCount["Needs Repair"] || 0,
-          conditionCount["Broken"] || 0
-        ) + 5, // Add padding above the max count
-        ticks: {
-          stepSize: 10, // Adjust based on expected range
-        },
-        title: {
-          display: true,
-          text: "Number of Devices",
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  }}
-/>
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <Bar
+                  data={conditionData}
+                  options={{
+                    responsive: true,
+                    scales: {
+                      y: {
+                        beginAtZero: true,
+                        suggestedMax: Math.max(
+                          conditionCount["Good"] || 0,
+                          conditionCount["Fair"] || 0,
+                          conditionCount["Needs Repair"] || 0,
+                          conditionCount["Broken"] || 0
+                        ) + 20,
+                        ticks: {
+                          stepSize: 10,
+                        },
+                        title: {
+                          display: true,
+                          text: "Number of Devices",
+                        },
+                      },
+                    },
+                    plugins: {
+                      legend: {
+                        display: false,
+                      },
+                    },
+                  }}
+                />
+              </div>
+            </div>
           </div>
           <div className="col-md-6">
             <h4>Device Status</h4>
-            <Pie data={statusData} options={{ responsive: true }} />
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <Doughnut
+                  data={statusData}
+                  options={{
+                    responsive: true,
+                    cutout: '60%',
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                      },
+                    },
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

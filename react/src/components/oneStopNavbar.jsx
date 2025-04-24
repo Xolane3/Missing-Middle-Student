@@ -113,11 +113,11 @@ const OneStopNavbar = ({
 
           <div className="d-flex gap-4 align-items-center">
             <Link
-              to="/admin/notifications"
+              to="/onestop/notifications"
               className="nav-link position-relative"
               style={{
                 ...linkStyle,
-                ...(hoveredLink === "notifications" || isActive("/admin/notifications")
+                ...(hoveredLink === "notifications" || isActive("/onestop/notifications")
                   ? linkHoverStyle
                   : {}),
               }}
@@ -132,7 +132,7 @@ const OneStopNavbar = ({
               className="nav-link"
               style={{
                 ...linkStyle,
-                ...(hoveredLink === "register" || isActive("/admin/register-student")
+                ...(hoveredLink === "register" || isActive("/onestop/register-student")
                   ? linkHoverStyle
                   : {}),
               }}

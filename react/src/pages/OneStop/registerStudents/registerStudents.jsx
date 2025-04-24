@@ -5,15 +5,16 @@ const RegisterStudent = () => {
   const [form, setForm] = useState({
     surname: "",
     studentNumber: "",
+    studentEmail: "",
     department: "",
     courseCode: "",
     programType: "Diploma",
     year: "",
-   
     averageMark: "",
     nationality: "",
-    studentEmail: "",
     campus: "",
+    idNumber: "",        // New field
+    gender: "",          // New field
   });
 
   const handleChange = (e) => {
@@ -79,6 +80,31 @@ const RegisterStudent = () => {
             <div className="col-md-4">
               <input
                 type="text"
+                name="idNumber"
+                className="form-control"
+                placeholder="ID Number"
+                value={form.idNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <select
+                name="gender"
+                className="form-select"
+                value={form.gender}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div className="col-md-4">
+              <input
+                type="text"
                 name="nationality"
                 className="form-control"
                 placeholder="Nationality"
@@ -109,7 +135,6 @@ const RegisterStudent = () => {
                 required
               />
             </div>
-
             <div className="col-md-4">
               <input
                 type="text"
@@ -150,6 +175,7 @@ const RegisterStudent = () => {
                 required
               />
             </div>
+
             <div className="col-12 d-flex justify-content-end">
               <button type="submit" className="btn btn-primary">
                 Register Student

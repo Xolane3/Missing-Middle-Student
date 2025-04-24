@@ -15,6 +15,8 @@ const dummyStudents = [
     studentEmail: "218123456@tut4life.ac.za",
     nationality: "South African",
     race: "Black African",
+    idNumber: "9901185919081",
+    gender: "Female",
   },
   {
     surname: "Naidoo",
@@ -28,6 +30,8 @@ const dummyStudents = [
     studentEmail: "218654321@tut4life.ac.za",
     nationality: "South African",
     race: "Indian",
+    idNumber: "9802195919081",
+    gender: "Male",
   },
   {
     surname: "Smith",
@@ -41,6 +45,8 @@ const dummyStudents = [
     studentEmail: "219987654@tut4life.ac.za",
     nationality: "Zimbabwean",
     race: "White",
+    idNumber: "0001185919081",
+    gender: "Female",
   },
 ];
 
@@ -74,6 +80,8 @@ const OneStopDashboard = () => {
             <tr>
               <th>Surname</th>
               <th>Student Number</th>
+              <th>ID Number</th>
+              <th>Gender</th>
               <th>Email</th>
               <th>Nationality</th>
               <th>Race</th>
@@ -90,6 +98,8 @@ const OneStopDashboard = () => {
               <tr key={index}>
                 <td>{student.surname}</td>
                 <td>{student.studentNumber}</td>
+                <td>{student.idNumber}</td>
+                <td>{student.gender}</td>
                 <td>{student.studentEmail}</td>
                 <td>{student.nationality}</td>
                 <td>{student.race}</td>

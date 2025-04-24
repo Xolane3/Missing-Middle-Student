@@ -119,13 +119,6 @@ export default function ApplyForLaptop() {
               value={course} onChange={(e) => setCourse(e.target.value)} />
           </div>
 
-          {/* Academic Performance */}
-          <div className="mb-3">
-            <label htmlFor="academicPerformance" className="form-label">Academic Performance (%)</label>
-            <input type="number" className="form-control" id="academicPerformance"
-              value={academicPerformance} onChange={(e) => setAcademicPerformance(e.target.value)} />
-          </div>
-
           {/* Upload Academic Record */}
           <div className="mb-3">
             <label htmlFor="academicRecordFile" className="form-label">Upload Academic Record</label>
@@ -177,12 +170,6 @@ export default function ApplyForLaptop() {
             </div>
           )}
 
-          {/* Faculty */}
-          <div className="mb-3">
-            <label htmlFor="facultySelection" className="form-label">Specialization</label>
-            <input type="text" className="form-control" id="facultySelection"
-              value={facultySelection} onChange={(e) => setFacultySelection(e.target.value)} />
-          </div>
 
           {/* Terms Checkbox */}
           <div className="mb-3">

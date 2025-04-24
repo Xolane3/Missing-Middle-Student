@@ -62,6 +62,10 @@ const OneStopDashboard = () => {
     <>
       <OneStopNavbar username="OneStop Admin" email="onestop@tut.ac.za" notifications={3} />
       <div className="container mt-4">
+        {/* Main centered header */}
+        <h2 className="text-center mb-4 fw-bold">One Stop Dashboard</h2>
+
+        {/* Section heading for student table */}
         <h4 className="mb-3">Registered TUT Students</h4>
 
         <div className="mb-3 d-flex align-items-center">
@@ -113,7 +117,7 @@ const OneStopDashboard = () => {
             ))}
             {filteredStudents.length === 0 && (
               <tr>
-                <td colSpan="11" className="text-center text-muted">
+                <td colSpan="13" className="text-center text-muted">
                   No students found.
                 </td>
               </tr>

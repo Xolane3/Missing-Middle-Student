@@ -15,6 +15,8 @@ const dummyStudents = [
     studentEmail: "218123456@tut4life.ac.za",
     nationality: "South African",
     race: "Black African",
+    idNumber: "9901185919081",
+    gender: "Female",
   },
   {
     surname: "Naidoo",
@@ -28,6 +30,8 @@ const dummyStudents = [
     studentEmail: "218654321@tut4life.ac.za",
     nationality: "South African",
     race: "Indian",
+    idNumber: "9802195919081",
+    gender: "Male",
   },
   {
     surname: "Smith",
@@ -41,6 +45,8 @@ const dummyStudents = [
     studentEmail: "219987654@tut4life.ac.za",
     nationality: "Zimbabwean",
     race: "White",
+    idNumber: "0001185919081",
+    gender: "Female",
   },
 ];
 
@@ -56,6 +62,10 @@ const OneStopDashboard = () => {
     <>
       <OneStopNavbar username="OneStop Admin" email="onestop@tut.ac.za" notifications={3} />
       <div className="container mt-4">
+        {/* Main centered header */}
+        <h2 className="text-center mb-4 fw-bold">One Stop Dashboard</h2>
+
+        {/* Section heading for student table */}
         <h4 className="mb-3">Registered TUT Students</h4>
 
         <div className="mb-3 d-flex align-items-center">
@@ -74,6 +84,8 @@ const OneStopDashboard = () => {
             <tr>
               <th>Surname</th>
               <th>Student Number</th>
+              <th>ID Number</th>
+              <th>Gender</th>
               <th>Email</th>
               <th>Nationality</th>
               <th>Race</th>
@@ -90,6 +102,8 @@ const OneStopDashboard = () => {
               <tr key={index}>
                 <td>{student.surname}</td>
                 <td>{student.studentNumber}</td>
+                <td>{student.idNumber}</td>
+                <td>{student.gender}</td>
                 <td>{student.studentEmail}</td>
                 <td>{student.nationality}</td>
                 <td>{student.race}</td>
@@ -103,7 +117,7 @@ const OneStopDashboard = () => {
             ))}
             {filteredStudents.length === 0 && (
               <tr>
-                <td colSpan="11" className="text-center text-muted">
+                <td colSpan="13" className="text-center text-muted">
                   No students found.
                 </td>
               </tr>

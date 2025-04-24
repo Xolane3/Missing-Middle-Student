@@ -1,45 +1,56 @@
 // StudentDashboard.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../../components/studentNavbar"; // Import the NavBar component
-
+import NavBar from "../../components/studentNavbar";
 
 export default function StudentDashboard() {
   const navigate = useNavigate();
-  
-  // Example: Simulating user data passed after login
+
   const [user, setUser] = useState({
-    username: "John Doe", // This should be dynamically fetched from login data
-    email: "john.doe@example.com", // This should also be fetched from login data
-    applicationStatus: "pending", // Simulating application status
-    deviceStatus: "out_of_device", // Example status, could be 'approved', 'pending', or 'out_of_device'
+    username: "John Doe",
+    email: "john.doe@example.com",
+    applicationStatus: "pending",
+    deviceStatus: "out_of_device",
   });
 
-  const [notifications, setNotifications] = useState(3); // Number of notifications
+  const [notifications, setNotifications] = useState(3);
 
   useEffect(() => {
-    // Simulate fetching user data and application status from API
-    // In a real application, you would replace this with actual data fetching
+    // Fetch actual data here if needed
   }, []);
 
-  const handleLogout = () => {
-    // Simulate logout by clearing session or token
-    navigate("/student/login"); // Redirect to login page
-  };
+  const handleLogout = () => navigate("/student/login");
+  const handleApplyForLaptop = () => navigate("/student/apply-laptop");
+  const handleStatusCheck = () => navigate("/student/application-status");
+  const handleProfileClick = () => navigate("/student/profile");
 
-  const handleApplyForLaptop = () => {
-    // Navigate to the application page to apply for the laptop
-    navigate("/student/apply-laptop");
-  };
-
-  const handleStatusCheck = () => {
-    // Navigate to a page to view the application status
-    navigate("/status");
+  const renderStatusAlert = () => {
+    if (user.deviceStatus === "out_of_device") {
+      return (
+        <div className="alert alert-warning">
+          <strong>Out of Device:</strong> No devices are currently available.
+        </div>
+      );
+    }
+    if (user.applicationStatus === "pending") {
+      return (
+        <div className="alert alert-info">
+          <strong>Application Pending:</strong> Awaiting admin approval.
+        </div>
+      );
+    }
+    if (user.applicationStatus === "approved") {
+      return (
+        <div className="alert alert-success">
+          <strong>Approved:</strong> You'll be notified when a device is assigned.
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
-    <div>
-      {/* Pass user data and functions to the NavBar component */}
+    <>
       <NavBar
         username={user.username}
         email={user.email}
@@ -47,27 +58,55 @@ export default function StudentDashboard() {
         onLogout={handleLogout}
         onApplyForLaptop={handleApplyForLaptop}
         onStatusCheck={handleStatusCheck}
+        profilePic={user.profilePic}
       />
 
-      {/* Application Status */}
-      <div className="container mt-5">
-        <h2>Application Status</h2>
-        {user.deviceStatus === "out_of_device" && (
-          <div className="alert alert-warning" role="alert">
-            Out of device: There are currently no devices available for assignment.
+      <div className="container mt-4">
+        <div className="text-center mb-4">
+          <h1 className="fw-bold">
+            <span
+              style={{  color: "#0d6efd", textDecoration: "underline" }}
+            >
+              Welcome, {user.username} 👋
+            </span>
+          </h1>
+          <p className="text-muted">Check your application and device status below</p>
+        </div>
+
+        <div className="row g-4">
+          <div className="col-md-6">
+            <div className="card shadow-sm h-100">
+              <div className="card-body">
+                <h5 className="card-title">Application Status</h5>
+                {renderStatusAlert()}
+                <button
+                  className="btn btn-outline-primary mt-3"
+                  onClick={handleStatusCheck}
+                >
+                  View Application Details
+                </button>
+              </div>
+            </div>
           </div>
-        )}
-        {user.applicationStatus === "pending" && (
-          <div className="alert alert-info" role="alert">
-            Your application is pending approval. Please wait for the admin's response.
+
+          <div className="col-md-6">
+            <div className="card shadow-sm h-100">
+              <div className="card-body">
+                <h5 className="card-title">Apply for a Laptop</h5>
+                <p className="card-text">
+                  Need a device for your studies? Apply here to get started.
+                </p>
+                <button
+                  className="btn btn-success"
+                  onClick={handleApplyForLaptop}
+                >
+                  Apply Now
+                </button>
+              </div>
+            </div>
           </div>
-        )}
-        {user.applicationStatus === "approved" && (
-          <div className="alert alert-success" role="alert">
-            Your application has been approved! You will receive a notification when the device is assigned.
-          </div>
-        )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

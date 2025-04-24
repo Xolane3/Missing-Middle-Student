@@ -4,15 +4,29 @@ import { useNavigate } from "react-router-dom";
 export default function TechnicianLogin() {
   const navigate = useNavigate();
 
+  const [role, setRole] = useState("technician");
   const [technicianEmail, setTechnicianEmail] = useState("");
   const [technicianPassword, setTechnicianPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleRoleChange = (e) => {
+    const selectedRole = e.target.value;
+    setRole(selectedRole);
+
+    // Navigate to corresponding login route
+    if (selectedRole === "admin") {
+      navigate("/admin/login");
+    } else if (selectedRole === "student") {
+      navigate("/student/login");
+    } else if (selectedRole === "technician") {
+      navigate("/technician/login");
+    }
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Simulate technician login logic (replace with actual API call)
-    if (technicianEmail === "technician@example.com" && technicianPassword === "technicianpassword") {
+    if (technicianEmail === "" && technicianPassword === "") {
       navigate("/technician/dashboard");
     } else {
       setErrorMessage("Invalid email or password. Please try again.");
@@ -25,26 +39,59 @@ export default function TechnicianLogin() {
         <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
           <h3 className="text-center mb-4">Technician Login</h3>
 
+          {/* Role Selection */}
+          <div className="mb-4 d-flex justify-content-center gap-3">
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="role"
+                id="admin"
+                value="admin"
+                checked={role === "admin"}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor="admin">
+                Admin
+              </label>
+            </div>
+
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="role"
+                id="technician"
+                value="technician"
+                checked={role === "technician"}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor="technician">
+                Technician
+              </label>
+            </div>
+
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="role"
+                id="student"
+                value="student"
+                checked={role === "student"}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor="student">
+                Student
+              </label>
+            </div>
+          </div>
+
           {errorMessage && (
             <div className="alert alert-danger text-center" role="alert">
               {errorMessage}
             </div>
           )}
-
-          <div className="d-flex justify-content-between mb-4">
-            <button
-              className="btn btn-secondary w-100 me-2"
-              onClick={() => navigate("/student/login")}
-            >
-              Student Login
-            </button>
-            <button
-              className="btn btn-secondary w-100 ms-2"
-              onClick={() => navigate("/admin/login")}
-            >
-              Admin Login
-            </button>
-          </div>
 
           <form onSubmit={handleLogin}>
             <div className="mb-3">
@@ -58,7 +105,6 @@ export default function TechnicianLogin() {
                 placeholder="Enter your email"
                 value={technicianEmail}
                 onChange={(e) => setTechnicianEmail(e.target.value)}
-                required
               />
             </div>
 
@@ -73,7 +119,6 @@ export default function TechnicianLogin() {
                 placeholder="Enter your password"
                 value={technicianPassword}
                 onChange={(e) => setTechnicianPassword(e.target.value)}
-                required
               />
             </div>
 

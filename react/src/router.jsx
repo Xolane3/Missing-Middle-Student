@@ -7,6 +7,24 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import TechnicianLogin from "./pages/Technician/TechnicianLogin";
 import TechnicianDashboard from "./pages/Technician/TechnicianDashboard";
 import Apply from "./pages/Student/apply-laptop/apply";
+import ApplicationStatus from "./pages/Student/application-status/status";
+import Notifications from "./pages/Student/notifications/notifications";
+import TechNotification from "./pages/Technician/notifications/notification";
+import NewDeviceRegister from "./pages/Technician/registerNewDevice/newDeviceRegister";
+import Applications  from "./pages/Admin/applications/applications";
+import Students from "./pages/Admin/students/students";
+import AdminNotifications from "./pages/Admin/notifications/notifications";
+import TechViewDevices from "./pages/Technician/viewDevices/viewAllDevices";
+import OneStopDashboard from "./pages/OneStop/oneStopDashboard";
+import RegisterStudent from "./pages/OneStop/registerStudents/registerStudents";
+import OneStopNotification from "./pages/OneStop/notifications/oneStopNotification";
+import FinancialAidDashboard from "./pages/FinancialAid/notification";
+import StatusPage from "./pages/FinancialAid/status/status";
+import FinancialNotification from "./pages/FinancialAid/notification/financialNotification";
+import Distributor from "./pages/Distributor/distributor";
+import AssignDevice from "./pages/Distributor/assignDevice/assignDevice";
+
+
 
 
 export const router = createBrowserRouter([
@@ -19,5 +37,26 @@ export const router = createBrowserRouter([
   { path: "/technician/login", element: <TechnicianLogin /> },
   { path: "/technician/dashboard", element: <TechnicianDashboard /> },
   { path: "/student/apply-laptop", element: <Apply /> },
+  { path: "/student/application-status", element: <ApplicationStatus /> },
+  { path: "/technician/notifications", element: <TechNotification /> },
+  { path: "/technician/registerNewDevice", element: <NewDeviceRegister /> },
+  { path: "/admin/applications", element: <Applications /> },
+  { path: "/admin/students", element: <Students /> },
+  { path: "/student/notifications", element: <Notifications /> },
+  { path: "/admin/notifications", element: <AdminNotifications /> },
+  { path: "/technician/viewDevices", element: <TechViewDevices /> },
+  { path: "/onestop/dashboard", element: <OneStopDashboard /> },
+  { path: "/onestop/register-student", element: <RegisterStudent /> },
+  {path: "/onestop/notifications", element: <OneStopNotification />},
+  {path: "/financialaid/dashboard", element: <FinancialAidDashboard />},
+  {path: "/financialaid/status", element: <StatusPage />},
+  {path: "/financialaid/notifications", element: <FinancialNotification />},
+  
+  { path: "/Distributor/distributor-Dashboard", element: <Distributor /> },
+  { path: "/Distributor/assignDevice", element: <AssignDevice /> },
+
+
+  
+
   
 ]);

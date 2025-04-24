@@ -16,12 +16,13 @@ export default function StudentDashboard() {
   const [notifications, setNotifications] = useState(3);
 
   useEffect(() => {
-    // Fetch data if needed
+    // Fetch actual data here if needed
   }, []);
 
   const handleLogout = () => navigate("/student/login");
   const handleApplyForLaptop = () => navigate("/student/apply-laptop");
   const handleStatusCheck = () => navigate("/student/application-status");
+  const handleProfileClick = () => navigate("/student/profile");
 
   const renderStatusAlert = () => {
     if (user.deviceStatus === "out_of_device") {
@@ -57,11 +58,18 @@ export default function StudentDashboard() {
         onLogout={handleLogout}
         onApplyForLaptop={handleApplyForLaptop}
         onStatusCheck={handleStatusCheck}
+        profilePic={user.profilePic}
       />
 
       <div className="container mt-4">
         <div className="text-center mb-4">
-          <h1 className="fw-bold">Welcome, {user.username} 👋</h1>
+          <h1 className="fw-bold">
+            <span
+              style={{  color: "#0d6efd", textDecoration: "underline" }}
+            >
+              Welcome, {user.username} 👋
+            </span>
+          </h1>
           <p className="text-muted">Check your application and device status below</p>
         </div>
 

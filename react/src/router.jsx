@@ -18,6 +18,7 @@ import TechViewDevices from "./pages/Technician/viewDevices/viewAllDevices";
 import OneStopDashboard from "./pages/OneStop/oneStopDashboard";
 import RegisterStudent from "./pages/OneStop/registerStudents/registerStudents";
 import OneStopNotification from "./pages/OneStop/notifications/oneStopNotification";
+import StudentProfile from "./pages/Student/StudentProfile";
 
 
 
@@ -43,6 +44,7 @@ export const router = createBrowserRouter([
   { path: "/onestop/dashboard", element: <OneStopDashboard /> },
   { path: "/onestop/register-student", element: <RegisterStudent /> },
   {path: "/onestop/notifications", element: <OneStopNotification />},
+  {path:"/student/profile", element: <StudentProfile />},
 
 
   

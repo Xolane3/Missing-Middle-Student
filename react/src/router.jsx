@@ -15,6 +15,8 @@ import Applications  from "./pages/Admin/applications/applications";
 import Students from "./pages/Admin/students/students";
 import AdminNotifications from "./pages/Admin/notifications/notifications";
 import TechViewDevices from "./pages/Technician/viewDevices/viewAllDevices";
+import OneStopDashboard from "./pages/OneStop/oneStopDashboard";
+import RegisterStudent from "./pages/OneStop/registerStudents/registerStudents";
 
 
 
@@ -37,6 +39,8 @@ export const router = createBrowserRouter([
   { path: "/student/notifications", element: <Notifications /> },
   { path: "/admin/notifications", element: <AdminNotifications /> },
   { path: "/technician/viewDevices", element: <TechViewDevices /> },
+  { path: "/onestop/dashboard", element: <OneStopDashboard /> },
+  { path: "/onestop/register-student", element: <RegisterStudent /> },
 
 
   

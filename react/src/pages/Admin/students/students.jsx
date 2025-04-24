@@ -20,6 +20,7 @@ export default function Students() {
         year: '3rd Year',
         registrationDate: '2022-01-15',
         averageMark: 72,
+        nsfasStatus: true,
         studentEmail: '218123456@tut4life.ac.za',
         nationality: 'South African',
         race: 'Black African',
@@ -35,6 +36,7 @@ export default function Students() {
         year: '4th Year',
         registrationDate: '2021-02-10',
         averageMark: 80,
+        nsfasStatus: false,
         studentEmail: '218654321@tut4life.ac.za',
         nationality: 'South African',
         race: 'Indian',
@@ -50,6 +52,7 @@ export default function Students() {
         year: '2nd Year',
         registrationDate: '2023-03-01',
         averageMark: 68,
+        nsfasStatus: true,
         studentEmail: '219987654@tut4life.ac.za',
         nationality: 'Zimbabwean',
         race: 'White',
@@ -101,14 +104,13 @@ export default function Students() {
                   <th>ID Number</th>
                   <th>Gender</th>
                   <th>Email</th>
-                  <th>Nationality</th>
                   <th>Race</th>
                   <th>Department</th>
                   <th>Course Code</th>
                   <th>Program</th>
                   <th>Year</th>
                   <th>Registration Date</th>
-                  <th>Average Mark (%)</th>
+                  <th>NSFAS Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -119,19 +121,18 @@ export default function Students() {
                     <td>{student.idNumber}</td>
                     <td>{student.gender}</td>
                     <td>{student.studentEmail}</td>
-                    <td>{student.nationality}</td>
                     <td>{student.race}</td>
                     <td>{student.department}</td>
                     <td>{student.courseCode}</td>
                     <td>{student.programType}</td>
                     <td>{student.year}</td>
                     <td>{student.registrationDate}</td>
-                    <td>{student.averageMark}</td>
+                    <td>{student.nsfasStatus ? 'Funded' : 'Not Funded'}</td>
                   </tr>
                 ))}
                 {filteredStudents.length === 0 && (
                   <tr>
-                    <td colSpan="13" className="text-muted py-2">
+                    <td colSpan="14" className="text-muted py-2">
                       No students found.
                     </td>
                   </tr>

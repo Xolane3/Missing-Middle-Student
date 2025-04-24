@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import AdminNavbar from '../../../components/adminNavBar';
-import AdminFooter from '../../../components/adminFooter'; // ✅ Import footer
+import AdminFooter from '../../../components/adminFooter';
 
 export default function Applications() {
   const [applications, setApplications] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [eligibilityFilter, setEligibilityFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
 
   useEffect(() => {
     const dummyData = [
@@ -116,8 +118,8 @@ export default function Applications() {
       {
         id: 9,
         studentNumber: '2023444455',
-        surname: 'Mokoena',
-        initials: 'T.',
+        surname: 'Nkwanyana',
+        initials: 'X.',
         nsfasFunded: false,
         averageMark: 75,
         income: 399999,
@@ -142,11 +144,28 @@ export default function Applications() {
   };
 
   const handleDecision = (id, decision) => {
-    setApplications((prev) =>
-      prev.map((app) =>
-        app.id === id ? { ...app, status: decision } : app
-      )
-    );
+    Swal.fire({
+      title: 'Enter Admin Password',
+      input: 'password',
+      inputLabel: 'Password',
+      inputPlaceholder: 'Enter password',
+      inputAttributes: {
+        autocapitalize: 'off',
+        autocorrect: 'off',
+        required: true,
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+    }).then(async ({ value: password }) => {
+      if (password === 'admin123') {
+        setApplications((prev) =>
+          prev.map((app) => (app.id === id ? { ...app, status: decision } : app))
+        );
+        Swal.fire('Success!', `Application ${decision}.`, 'success');
+      } else if (password) {
+        Swal.fire('Error', 'Incorrect password. Action denied.', 'error');
+      }
+    });
   };
 
   const filteredApplications = applications.filter((app) => {
@@ -162,7 +181,10 @@ export default function Applications() {
         ? isEligible(app)
         : !isEligible(app);
 
-    return matchesSearch && matchesEligibility;
+    const matchesStatus =
+      statusFilter === 'all' ? true : app.status === statusFilter;
+
+    return matchesSearch && matchesEligibility && matchesStatus;
   });
 
   return (
@@ -174,7 +196,7 @@ export default function Applications() {
 
           {/* Filters */}
           <div className="row mb-3">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <input
                 type="text"
                 placeholder="Search by Student Number, Surname, or Initials"
@@ -183,7 +205,7 @@ export default function Applications() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <select
                 className="form-select"
                 value={eligibilityFilter}
@@ -192,6 +214,18 @@ export default function Applications() {
                 <option value="all">All</option>
                 <option value="eligible">Eligible</option>
                 <option value="notEligible">Not Eligible</option>
+              </select>
+            </div>
+            <div className="col-md-4">
+              <select
+                className="form-select"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+              >
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
               </select>
             </div>
           </div>
@@ -259,7 +293,7 @@ export default function Applications() {
         </div>
       </div>
 
-      <div className="mt-auto"> {/* Ensures footer stays at bottom */}
+      <div className="mt-auto">
         <AdminFooter />
       </div>
     </div>

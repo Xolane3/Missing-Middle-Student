@@ -21,6 +21,8 @@ import OneStopNotification from "./pages/OneStop/notifications/oneStopNotificati
 import FinancialAidDashboard from "./pages/FinancialAid/notification";
 import StatusPage from "./pages/FinancialAid/status/status";
 import FinancialNotification from "./pages/FinancialAid/notification/financialNotification";
+import Distributor from "./pages/Distributor/distributor";
+import AssignDevice from "./pages/Distributor/assignDevice/assignDevice";
 
 
 
@@ -49,6 +51,9 @@ export const router = createBrowserRouter([
   {path: "/financialaid/dashboard", element: <FinancialAidDashboard />},
   {path: "/financialaid/status", element: <StatusPage />},
   {path: "/financialaid/notifications", element: <FinancialNotification />},
+  
+  { path: "/Distributor/distributor-Dashboard", element: <Distributor /> },
+  { path: "/Distributor/assignDevice", element: <AssignDevice /> },
 
 
   

@@ -17,8 +17,9 @@ import AdminNotifications from "./pages/Admin/notifications/notifications";
 import TechViewDevices from "./pages/Technician/viewDevices/viewAllDevices";
 import OneStopDashboard from "./pages/OneStop/oneStopDashboard";
 import RegisterStudent from "./pages/OneStop/registerStudents/registerStudents";
-import OneStopNotification from "./pages/OneStop/notifications/oneStopNotification";
-import StudentProfile from "./pages/Student/StudentProfile";
+import Distributor from "./pages/Distributor/distributor";
+import AssignDevice from "./pages/Distributor/assignDevice/assignDevice";
+
 
 
 
@@ -43,8 +44,9 @@ export const router = createBrowserRouter([
   { path: "/technician/viewDevices", element: <TechViewDevices /> },
   { path: "/onestop/dashboard", element: <OneStopDashboard /> },
   { path: "/onestop/register-student", element: <RegisterStudent /> },
-  {path: "/onestop/notifications", element: <OneStopNotification />},
-  {path:"/student/profile", element: <StudentProfile />},
+  { path: "/Distributor/distributor-Dashboard", element: <Distributor /> },
+  { path: "/Distributor/assignDevice", element: <AssignDevice /> },
+
 
 
   

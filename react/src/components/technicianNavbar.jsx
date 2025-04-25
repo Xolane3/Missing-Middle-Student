@@ -127,6 +127,22 @@ const TechNavBar = ({
             <BsClipboardCheck /> Register Device
           </Link>
 
+          <Link
+            to="/technician/contract"
+            onClick={onStatusCheck}
+            className="nav-link"
+            style={{
+              ...linkStyle,
+              ...(hoveredLink === "contract" || isActive("/technician/contract")
+                ? linkHoverStyle
+                : {}),
+            }}
+            onMouseEnter={() => setHoveredLink("contract")}
+            onMouseLeave={() => setHoveredLink(null)}
+          >
+            <BsClipboardCheck /> Device Contract
+          </Link>
+
           <span
             className="nav-link fw-bold"
             role="button"

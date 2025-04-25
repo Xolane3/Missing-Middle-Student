@@ -23,6 +23,8 @@ import StatusPage from "./pages/FinancialAid/status/status";
 import FinancialNotification from "./pages/FinancialAid/notification/financialNotification";
 import Distributor from "./pages/Distributor/distributor";
 import AssignDevice from "./pages/Distributor/assignDevice/assignDevice";
+import DeviceContractForm from "./pages/Technician/contract/deviceContractForm";
+import GenerateReports from "./pages/Distributor/Reports/reports";
 
 
 

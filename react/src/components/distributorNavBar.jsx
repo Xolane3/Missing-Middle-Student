@@ -44,7 +44,7 @@ const DistriNavBar = ({
       cancelButtonColor: "#3085d6",
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/login");
+        navigate("/student/login");
       }
     });
   };
@@ -76,21 +76,7 @@ const DistriNavBar = ({
 
         {/* Right section: Nav links */}
         <div className="d-flex gap-4 align-items-center">
-          <Link
-            to="/distributor/viewDevices"
-            className="nav-link"
-            style={{
-              ...linkStyle,
-              ...(hoveredLink === "devices" || isActive("/distributor/viewDevices")
-                ? linkHoverStyle
-                : {}),
-            }}
-            onMouseEnter={() => setHoveredLink("devices")}
-            onMouseLeave={() => setHoveredLink(null)}
-          >
-            <BsLaptop /> Devices
-          </Link>
-
+         
           <Link
             to="/distributor/notifications"
             className="nav-link position-relative"
@@ -123,15 +109,15 @@ const DistriNavBar = ({
             onMouseEnter={() => setHoveredLink("assignDevice")}
             onMouseLeave={() => setHoveredLink(null)}
           >
-            <BsClipboardCheck /> Assign Device
+            <BsClipboardCheck /> Assign Devices
           </Link>
 
           <Link
-            to="/distributor/reports"
+            to="/Distributor/reports"
             className="nav-link"
             style={{
               ...linkStyle,
-              ...(hoveredLink === "reports" || isActive("/distributor/reports")
+              ...(hoveredLink === "reports" || isActive("/Distributor/reports")
                 ? linkHoverStyle
                 : {}),
             }}

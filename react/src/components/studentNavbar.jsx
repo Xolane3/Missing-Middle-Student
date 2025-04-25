@@ -13,14 +13,14 @@ const NavBar = ({ username, email, notifications, onStatusCheck, profilePic }) =
   const navigate = useNavigate();
 
   return (
-    <nav className="navbar navbar-expand-lg bg-light p-3 shadow-sm">
+    <nav className="navbar navbar-expand-lg bg-primary p-3 shadow-sm">
       <div className="container-fluid d-flex justify-content-between align-items-center">
 
         {/* Left Side: Profile and Home Icon */}
         <div className="d-flex align-items-center gap-4">
           <Link
             to="/student/profile"
-            className="navbar-brand text-primary fw-semibold text-decoration-none d-flex align-items-center gap-3"
+            className="navbar-brand text-white fw-semibold text-decoration-none d-flex align-items-center gap-3"
           >
             {profilePic ? (
               <img
@@ -35,14 +35,14 @@ const NavBar = ({ username, email, notifications, onStatusCheck, profilePic }) =
                 }}
               />
             ) : (
-              <BsPersonCircle size={24} className="me-2" />
+              <BsPersonCircle size={24} className="me-2 text-white" />
             )}
             <span>Welcome, {username}</span>
           </Link>
 
           <Link
             to="/student/dashboard"
-            className="nav-link text-dark d-flex align-items-center"
+            className="nav-link text-white d-flex align-items-center"
             title="Home"
           >
             <BsHouse size={20} />
@@ -50,27 +50,27 @@ const NavBar = ({ username, email, notifications, onStatusCheck, profilePic }) =
         </div>
 
         {/* Middle: Email */}
-        <span className="text-muted me-4">{email}</span>
+        <span className="text-white me-4">{email}</span>
 
         {/* Right Side: Nav Controls */}
         <div className="d-flex gap-4">
-          <Link to="/student/notifications" className="nav-link custom-link">
+          <Link to="/student/notifications" className="nav-link text-white">
             <BsBell className="me-1" /> Notifications ({notifications})
           </Link>
 
-          <Link to="/student/apply-laptop" className="nav-link custom-link">
+          <Link to="/student/apply-laptop" className="nav-link text-white">
             <BsLaptop className="me-1" /> Apply for Laptop
           </Link>
 
           <Link
             to="/student/application-status"
-            className="nav-link custom-link"
+            className="nav-link text-white"
             onClick={onStatusCheck}
           >
             <BsClipboardCheck className="me-1" /> Application Status
           </Link>
 
-          <Link to="/student/login" className="nav-link custom-link text-danger">
+          <Link to="/student/login" className="nav-link text-light">
             <BsBoxArrowRight className="me-1" /> Logout
           </Link>
         </div>

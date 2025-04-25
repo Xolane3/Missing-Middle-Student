@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import OneStopNavbar from "../../../components/oneStopNavbar";
+import AdminNavbar from "../../../components/adminNavBar";
 
 const RegisterStudent = () => {
   const [form, setForm] = useState({
@@ -38,7 +38,7 @@ const RegisterStudent = () => {
 
   return (
     <>
-      <OneStopNavbar username="OneStop Admin" email="onestop@tut.ac.za" notifications={3} />
+      <AdminNavbar username="OneStop Admin" email="onestop@tut.ac.za" notifications={3} />
       <div className="container mt-4">
         <h4>Register New Student</h4>
 

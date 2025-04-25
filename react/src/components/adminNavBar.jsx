@@ -10,6 +10,7 @@ import {
   BsPersonCircle,
 } from "react-icons/bs";
 
+// Styles
 const linkStyle = {
   color: "white",
   textDecoration: "none",
@@ -19,10 +20,7 @@ const linkStyle = {
   gap: "6px",
   transition: "color 0.3s",
 };
-
-const linkHoverStyle = {
-  color: "#ffc107",
-};
+const linkHoverStyle = { color: "#ffc107" };
 
 const AdminNavbar = ({
   username = "Admin01",
@@ -32,10 +30,11 @@ const AdminNavbar = ({
   const navigate = useNavigate();
   const location = useLocation();
   const [hoveredLink, setHoveredLink] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Modal logic
   const modalRef = useRef(null);
   const fileInputRef = useRef(null);
+
   const [bsModal, setBsModal] = useState(null);
   const [editable, setEditable] = useState(false);
   const [profilePic, setProfilePic] = useState("https://via.placeholder.com/120");
@@ -51,17 +50,15 @@ const AdminNavbar = ({
 
   useEffect(() => {
     if (modalRef.current) {
-      const modal = new Modal(modalRef.current, {
+      const modalInstance = new Modal(modalRef.current, {
         backdrop: "static",
         keyboard: false,
       });
-      setBsModal(modal);
+      setBsModal(modalInstance);
     }
   }, []);
 
-  const openModal = () => {
-    bsModal?.show();
-  };
+  const openModal = () => bsModal?.show();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,9 +74,7 @@ const AdminNavbar = ({
     }
   };
 
-  const triggerFileInput = () => {
-    fileInputRef.current.click();
-  };
+  const triggerFileInput = () => fileInputRef.current?.click();
 
   const handleLogout = () => {
     Swal.fire({
@@ -91,9 +86,7 @@ const AdminNavbar = ({
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
     }).then((result) => {
-      if (result.isConfirmed) {
-        navigate("/admin/login");
-      }
+      if (result.isConfirmed) navigate("/admin/login");
     });
   };
 
@@ -101,32 +94,32 @@ const AdminNavbar = ({
 
   return (
     <>
+      {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm px-4 py-3">
         <div className="container-fluid d-flex justify-content-between align-items-center">
-          {/* Left: Welcome message with icon */}
+          {/* Left: Profile Trigger */}
           <div className="d-flex align-items-center gap-3">
             <BsPersonCircle
               className="text-white fs-3"
               role="button"
               onClick={openModal}
+              aria-label="Open account details"
             />
-            
-            <div className="d-flex flex-column text-white">
-            <Link to="/admin/dashboard" className="d-flex flex-column text-white text-decoration-none gap-1">
-              <span className="fw-semibold" role="button" >
-                Welcome, {username}
-              </span>
-              <small className="text-light">{email}</small>
-              </Link>
-            </div>
+            <Link
+              to="/admin/dashboard"
+              className="d-flex flex-column text-white text-decoration-none gap-1"
+            >
+              <span className="fw-semibold">Welcome, {username}</span>
+              <small>{email}</small>
+            </Link>
           </div>
-         
 
-          {/* Right: Navigation */}
+          {/* Right: Navigation Links */}
           <div className="d-flex gap-4 align-items-center">
+            {/* Regular Links */}
             <Link
               to="/admin/notifications"
-              className="nav-link position-relative"
+              className="nav-link"
               style={{
                 ...linkStyle,
                 ...(hoveredLink === "notifications" || isActive("/admin/notifications")
@@ -153,6 +146,48 @@ const AdminNavbar = ({
             >
               <BsLaptop /> Applications
             </Link>
+
+            {/* Dropdown for Register */}
+            <div
+              className="position-relative"
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
+            >
+              <span
+                className="nav-link"
+                style={{
+                  ...linkStyle,
+                  ...(dropdownOpen ? linkHoverStyle : {}),
+                }}
+              >
+                Register
+              </span>
+              {dropdownOpen && (
+                <div
+                  className="position-absolute bg-white rounded shadow-sm mt-1"
+                  style={{ zIndex: 1000, minWidth: "200px" }}
+                >
+                  <Link
+                    to="/onestop/register-student"
+                    className="dropdown-item text-dark"
+                  >
+                    Register Student
+                  </Link>
+                  <Link
+                    to="/onestop/register-technician"
+                    className="dropdown-item text-dark"
+                  >
+                    Register Technician
+                  </Link>
+                  <Link
+                    to="/onestop/register-financial"
+                    className="dropdown-item text-dark"
+                  >
+                    Register Financial Aid Officer
+                  </Link>
+                </div>
+              )}
+            </div>
 
             <Link
               to="/admin/students"
@@ -198,7 +233,9 @@ const AdminNavbar = ({
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="accountModalLabel">Account Details</h5>
+              <h5 className="modal-title" id="accountModalLabel">
+                Account Details
+              </h5>
               <button
                 type="button"
                 className="btn-close"
@@ -208,6 +245,7 @@ const AdminNavbar = ({
             </div>
             <div className="modal-body">
               <div className="d-flex gap-4">
+                {/* Profile Picture */}
                 <div className="text-center">
                   <img
                     src={profilePic}
@@ -229,41 +267,28 @@ const AdminNavbar = ({
                   <small className="d-block text-muted">Click image to change</small>
                 </div>
 
+                {/* Profile Form */}
                 <div className="flex-grow-1">
                   <form>
-                    <div className="mb-3">
-                      <label className="form-label">First Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        disabled={!editable}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label className="form-label">Last Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        disabled={!editable}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label className="form-label">E-mail</label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        disabled={!editable}
-                      />
-                    </div>
+                    {["firstName", "lastName", "email"].map((field, index) => (
+                      <div className="mb-3" key={index}>
+                        <label className="form-label">
+                          {field === "firstName"
+                            ? "First Name"
+                            : field === "lastName"
+                            ? "Last Name"
+                            : "E-mail"}
+                        </label>
+                        <input
+                          type={field === "email" ? "email" : "text"}
+                          className="form-control"
+                          name={field}
+                          value={formData[field]}
+                          onChange={handleChange}
+                          disabled={!editable}
+                        />
+                      </div>
+                    ))}
 
                     <div className="mb-3 row">
                       <div className="col">
@@ -288,18 +313,8 @@ const AdminNavbar = ({
                             disabled={!editable}
                           >
                             {[
-                              "January",
-                              "February",
-                              "March",
-                              "April",
-                              "May",
-                              "June",
-                              "July",
-                              "August",
-                              "September",
-                              "October",
-                              "November",
-                              "December",
+                              "January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December",
                             ].map((month) => (
                               <option key={month}>{month}</option>
                             ))}
@@ -336,9 +351,7 @@ const AdminNavbar = ({
                     <div className="d-flex justify-content-end mt-3">
                       <button
                         type="button"
-                        className={`btn ${
-                          editable ? "btn-primary" : "btn-outline-secondary"
-                        }`}
+                        className={`btn ${editable ? "btn-primary" : "btn-outline-secondary"}`}
                         onClick={() => setEditable(!editable)}
                       >
                         {editable ? "Update" : "Edit"}
